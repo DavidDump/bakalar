@@ -1,0 +1,15 @@
+# Programming language generations
+- [wikipedia page](https://en.wikipedia.org/wiki/Programming_language_generations)
+Programming languages can be categorized into generations. The generation was used to indicate the power of the language. Earlier generations are lower level languages, while later generations are higher level languages. The term was coined to differentiate higher level languages (third generation) from lower level languages (first generation).
+
+## First generation
+- [wikipedia page](https://en.wikipedia.org/wiki/First-generation_programming_language)
+First generation programing languages are the lowest level languages. They are machine level languages that often dont require translation, leaving out the compilation and linking step entirely. This means that the language is made up of binary numbers. This is a generational way to categorize machinec code.
+
+## Second generation
+- [wikipedia page](https://en.wikipedia.org/wiki/Second-generation_programming_language)
+Second generation programming language is a generational way to categorize assembly language. The main difference from first generation languages is that the code is human readable, which makes it easier to work with than machine code. The source file is then converted to machine code using an assembler, based on the target processor family. In assembly each line consists of a mnemonic and possibly operands. The mnemonic represents a processor instruction and the operands are the values that instruction is executed on. The only place assembly is used in modern programs is kernel or driver development. Its main disadvantages are that the programmer is required to write programs on the scale of individual instructions rather than logical steps. Also the resulting program is processor architecture specific making it less portable.
+
+## Third generation
+- [wikipedia page](https://en.wikipedia.org/wiki/Third-generation_programming_language)
+Third generation programming languages are higher level and more machine independent. Some examples are: BASIC, C, Java and Pascal. These languages move the responsibility of dealing with low level concepts line memory layout, typesafety to the compiler. They are more abstract than previous languages, therefore are considered high level languages. The first high level languages were instruduced in the late 1950s. Some notable examples include: Fortran, BASIC, COBOL and C. This category contains a wide variaty of languages, therefore can be subdivided even further, like object orientedness. Programs writen in third generation languages are processor architecture agnostic.

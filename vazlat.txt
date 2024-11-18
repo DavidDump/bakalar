@@ -1,0 +1,41 @@
+A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével. 
+
+Elméleti Rész
+- Formális nyelvek (1-old)
+- Programnyelvek (1-old)
+- 1. 2. 3. generációs programnyelvek (1-old)
+- x86 architektúra (1-old)
+- 3 utasítástípus (1-old)
+    - aritmetikai és logikai utasítás, (0.5 old) 
+    - flow control (branching, jump)(0.5 old)
+    - memory i/o instructions(0.5 old)
+- turing teljes programnyelvek; turing modell; turing teljesség feltételei (1old)
+- Parsing, Parsing rules, Parsing Tree (IR), Tokenizator (Regural expression). 2-3 old
+- LALR parser, parszolási szabályok. (Java LARL) (1old ig)
+- Saját nyelv leírása
+https://go.dev/ref/spec#Uniqueness_of_identifiers
+hasonlóan, de 5-10  old max
+
+Milyen előnyei vannak? Vagy mennyire lenne nehéz C compilert készíteni hozzá? (1 old)
+
+Gyakorlati Rész
+- Compiler felépítése: 
+    front-end (parser)
+        - (preprocesszor)
+        - tokenizator, tokenizálási szabályok, mintapéldák (1-2 old)
+        - parser, parszolási szabályok (1-2 old, lehet több is)
+            parsing tree. (0.5 oldal)
+            - aritmetika (1 oldal, példák, problémák)
+            - függvénynevek/függvényhívás, rekurzió, beágyazott, kereszthivatkozás, kontextus (2 oldal)
+            - struktúrákak, osztály, enum (1 oldal)
+    back-end
+        compiler szabályok, utasítások leírása, fordítási szabályok leírása (3-5 old)
+        milyen utasításokat használsz? (0.5 old/utasítás)
+        mik a szabályok, hogy vannak kiszámolva?
+        
+    Exe fájlformátum leírása (1old)
+    
+- Program felépítése, osztályok, modulok, metódusok, leírni minden egyenként. (1old/modul)
+            
+Alternative back-end
+for some simple instruction set (PIC10F320-I/OT) or esp32 or esp8266 or ARM or any
