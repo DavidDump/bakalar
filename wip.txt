@@ -1,3 +1,19 @@
+# Formal Languages
+- [wikipedia](https://en.wikipedia.org/wiki/Formal_language)
+Formal languages consist of symbols and rules which are used to construct statements or programs. They are often used in mathematics, computing or linguistics to formaly define the grammar of a language. They consist of an alphabet, the basic symbols and building blocks of the grammar. The grammar is the set of rules that describe how symbols can be combined to form words. The words combine to form the syntax of the given language. Based on the complexity of the language and the grammar that specifies it, languages can be classified into different categories, such as regular languages, context-free languages, context-sensitive languages, and recursively enumerable languages.
+
+# Programming Languages
+Programming languages are formal languages that are designed to describe specific tasks to computers. They consist of garmmar rules that make it possible to describe processor instructions in human language. Languages have a syntax that describes valid statements and expressions that can be translated or interpreted. Languages that handle data may ensure that the format used to write the data to memory is consistent with the format used to read the data. This is done by using a typesystem, and checking the type of each memory read and write operation. Languages may also provide ways of describing data as an aggregate type. 
+TODO:
+- controll flow
+- abstraction
+- standard library
+Languages can be categorized the following ways:
+- High level languages: language constructs are more removed from the hardware that the program is running on. examples: Python, Java, C#
+- Low level languages: languages that are closer related in structure to the underlying hardware it is running on. examples: Assembly
+- Compiled languages: these languages use a compiler to translate the source code to bytecode of the processor architecture it is targeting. examples: C, C++
+- Interpreted languages: these languages use an interpreter to execute the statements the source code line by line. examples: Python, JavaScript
+
 # Programming language generations
 - [wikipedia page](https://en.wikipedia.org/wiki/Programming_language_generations)
 Programming languages can be categorized into generations. The generation was used to indicate the power of the language. Earlier generations are lower level languages, while later generations are higher level languages. The term was coined to differentiate higher level languages (third generation) from lower level languages (first generation).
@@ -13,3 +29,5 @@ Second generation programming language is a generational way to categorize assem
 ## Third generation
 - [wikipedia page](https://en.wikipedia.org/wiki/Third-generation_programming_language)
 Third generation programming languages are higher level and more machine independent. Some examples are: BASIC, C, Java and Pascal. These languages move the responsibility of dealing with low level concepts line memory layout, typesafety to the compiler. They are more abstract than previous languages, therefore are considered high level languages. The first high level languages were instruduced in the late 1950s. Some notable examples include: Fortran, BASIC, COBOL and C. This category contains a wide variaty of languages, therefore can be subdivided even further, like object orientedness. Programs writen in third generation languages are processor architecture agnostic.
+
+# Turing Machine
