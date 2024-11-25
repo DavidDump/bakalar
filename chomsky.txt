@@ -1,0 +1,1 @@
+chompsky grammar: grammar describes a language, and a language is the set of all possible strings the grammar can produce

@@ -28,6 +28,15 @@ Programming languages can be categorized into several types, including:
 - Interpreted languages: These are executed line-by-line by an interpreter (e.g., Python, JavaScript).
 - Domain-specific languages: These are tailored for specific application domains (e.g., SQL for database queries, HTML for web markup).
 
+# x86 architecture
+TODO: add section
+
+## 3 types of instructions
+TODO: add section
+- arithmetic and logical ops
+- flow control ops
+- memory i/o ops
+
 # Programming language generations
 ## 1GL
 A first-generation programming language (1GL) refers to the earliest type of programming languages, which are essentially machine languages. These languages consist of binary code (0s and 1s) that the computer's central processing unit (CPU) can directly execute.
@@ -132,6 +141,88 @@ While Turing machines are abstract and not used for practical computation, they 
 - Arbitrary Memory Access: The system should allow for the manipulation of an arbitrary amount of memory, enabling it to store and retrieve data as needed during computation.
 - Conditional Branching: The system must support conditional statements (e.g., if-then-else constructs) that allow it to make decisions based on the current state or value of data. This enables the system to change its behavior based on different inputs.
 - Ability to Change State: The system must have a way to maintain and change its internal state. This is similar to the state register of a Turing machine, allowing the system to keep track of where it is in its computation.
+
+# Parsing
+Parsing is the process of analyzing a sequence of symbols, often in the form of text, to determine its grammatical structure according to a given set of rules. It is commonly used in computer science, linguistics, and programming languages.
+
+In the context of programming, parsing typically involves breaking down code into its component parts (such as keywords, operators, and expressions) to understand its meaning and structure. This is often the first step in interpreting or compiling code.
+
+In natural language processing (NLP), parsing refers to the analysis of sentences to understand their grammatical structure, which can help in tasks like machine translation, sentiment analysis, and information extraction.
+
+There are different types of parsing techniques, including:
+- Top-down parsing: Starts from the highest level of the parse tree and works down to the leaves.
+- Bottom-up parsing: Starts from the leaves and works up to the root of the parse tree.
+- Recursive descent parsing: A top-down approach that uses a set of recursive procedures to process the input.
+- Shift-reduce parsing: A bottom-up approach that uses a stack to hold symbols and applies shift and reduce operations to build the parse tree.
+
+Overall, parsing is a crucial step in understanding and processing both programming languages and natural languages.
+
+# Parsing rules
+Parsing rules are the guidelines or formal specifications that define how a sequence of symbols (such as code or natural language) should be analyzed and structured. These rules determine how to break down the input into its constituent parts and how to interpret their relationships. Parsing rules are often defined using formal grammars, which provide a systematic way to describe the syntax of a language.
+
+Here are some key concepts related to parsing rules:
+- Grammar: A set of rules that defines the structure of a language. It typically consists of:
+  - Terminals: The basic symbols from which strings are formed (e.g., keywords, operators).
+  - Non-terminals: Symbols that can be replaced by groups of terminals and/or non-terminals (e.g., expressions, statements).
+  - Productions: Rules that describe how non-terminals can be replaced with combinations of terminals and non-terminals.
+- Context-Free Grammar (CFG): A type of grammar where the left-hand side of each production rule consists of a single non-terminal. CFGs are widely used in programming languages and natural language processing.
+- Syntax Rules: Specific rules that dictate how symbols can be combined to form valid statements or expressions. For example, in a programming language, a syntax rule might specify that an "if" statement must be followed by a condition and a block of code. 
+- Parsing Techniques: Different methods for applying parsing rules, such as:
+  - Top-down parsing: Uses the grammar to predict the structure of the input from the top down.
+  - Bottom-up parsing: Builds the parse tree from the leaves up to the root, using the input symbols to reduce them to non-terminals.
+- Ambiguity: A situation where a single input can be parsed in multiple ways due to conflicting parsing rules. Resolving ambiguity is an important aspect of designing parsing rules.
+- Precedence and Associativity: Rules that determine the order in which operators are evaluated in expressions. For example, multiplication may have higher precedence than addition, affecting how an expression is parsed.
+
+Overall, parsing rules are essential for accurately interpreting and processing languages, whether they are programming languages or natural languages. They provide the framework for understanding the structure and meaning of the input.
+
+# Abstract Syntax Tree
+A parsing tree, also known as a syntax tree or abstract syntax tree (AST), is a hierarchical tree structure that represents the syntactic structure of a string according to a formal grammar. It visually depicts how the input (such as a sentence in natural language or a piece of code in a programming language) is broken down into its constituent parts based on the parsing rules.
+
+Key Components of a Parsing Tree:
+- Nodes: Each node in the tree represents a construct occurring in the input. There are typically two types of nodes:
+  - Non-terminal nodes: These represent grammatical constructs defined by the grammar (e.g., expressions, statements).
+  - Terminal nodes: These represent the actual symbols from the input (e.g., keywords, operators, identifiers).
+- Root: The topmost node of the tree, which represents the starting symbol of the grammar.
+- Leaves: The terminal nodes at the bottom of the tree, which correspond to the actual input symbols.
+- Branches: The connections between nodes that represent the relationships between different constructs.
+
+Types of Parsing Trees:
+- Concrete Syntax Tree: Represents the exact structure of the input, including all syntactic details. It shows every element of the input, including punctuation and whitespace.
+- Abstract Syntax Tree (AST): A simplified version of the concrete syntax tree that omits certain syntactic details. The AST focuses on the logical structure of the input, making it easier to analyze and manipulate for further processing, such as interpretation or compilation.
+
+Intermediate Representation:
+In the context of compilers and interpreters, an intermediate representation (IR) is a data structure or code that represents the program during the compilation process. It serves as a bridge between the high-level source code and the low-level machine code. The parsing tree (or AST) can be considered a form of intermediate representation, as it captures the essential structure and semantics of the input code without being tied to a specific programming language syntax.
+
+Importance of Parsing Trees and Intermediate Representations:
+- Semantic Analysis: Parsing trees help in understanding the meaning of the input by providing a clear structure to analyze.
+- Code Generation: Intermediate representations are used to generate target code (e.g., machine code) in a more efficient manner.
+- Optimization: Compilers can perform various optimizations on the intermediate representation before generating the final output.
+
+In summary, parsing trees and intermediate representations are crucial for understanding, analyzing, and transforming code or natural language input, facilitating various stages of processing in compilers, interpreters, and natural language processing systems.
+
+# LALR parser
+A LALR parser (Look-Ahead LR parser) is a type of bottom-up parser used in compiler design for syntax analysis. It is an extension of the LR parser, which stands for "Left-to-right" and "Rightmost derivation." LALR parsers are particularly popular because they can handle a wide range of programming languages while being more memory-efficient than full LR parsers.
+
+Key Features of LALR Parsers:
+- Look-Ahead: LALR parsers use a single token of look-ahead to make parsing decisions. This means they can consider the next input symbol when determining how to parse the current state.
+- State Reduction: LALR parsers maintain a finite state machine that represents the parsing states. Each state corresponds to a set of items (productions with a dot indicating how much of the production has been seen). The parser uses these states to decide whether to shift (read the next token) or reduce (apply a production rule).
+- Combining States: LALR parsers combine states from the more powerful LR(1) parser, which uses a full look-ahead of one token, to reduce the number of states. This is done by merging states that have the same core items but differ only in their look-ahead symbols. This merging can lead to conflicts, which the parser must resolve.
+- Conflict Resolution: LALR parsers can handle certain types of ambiguities and conflicts that arise during parsing, such as shift/reduce and reduce/reduce conflicts. However, they may not be able to resolve all conflicts, which can limit the types of grammars they can handle.
+
+Advantages of LALR Parsers:
+- Efficiency: LALR parsers are more memory-efficient than full LR parsers because they have fewer states, making them suitable for larger grammars.
+- Powerful: They can parse a wide range of context-free grammars, including many programming languages.
+- Deterministic: LALR parsers are deterministic, meaning that for a given input and state, there is a unique action to take (either shift or reduce).
+
+Disadvantages of LALR Parsers:
+- Conflict Handling: While LALR parsers can handle many conflicts, they may still encounter situations where they cannot resolve ambiguities, leading to parsing errors.
+- Grammar Limitations: Some grammars that can be parsed by LR(1) parsers may not be suitable for LALR parsing due to the merging of states.
+
+Applications:
+
+LALR parsers are widely used in compiler construction and are the basis for many parser generators, such as Yacc (Yet Another Compiler Compiler) and Bison. These tools allow developers to define grammars for programming languages and automatically generate the corresponding LALR parser.
+
+In summary, LALR parsers are a powerful and efficient tool for syntax analysis in compilers, capable of handling a wide variety of programming languages while maintaining a manageable state space.
 
 # Regular Expression
 A regular expression (often abbreviated as regex or regexp) is a sequence of characters that defines a search pattern. It is commonly used for string matching and manipulation.
