@@ -29,13 +29,84 @@ Programming languages can be categorized into several types, including:
 - Domain-specific languages: These are tailored for specific application domains (e.g., SQL for database queries, HTML for web markup).
 
 # x86 architecture
-TODO: add section
+x86 architecture is a family of instruction set architectures (ISAs) based on the Intel 8086 microprocessor and its successors. It is widely used in personal computers and servers. The term "x86" originally referred to the 16-bit 8086 and 8088 processors, but it has since evolved to encompass a range of 32-bit and 64-bit architectures, including the 80386 (32-bit) and the x86-64 (64-bit) extensions introduced by AMD.
+
+Key features of x86 architecture include:
+- CISC Design: x86 is a Complex Instruction Set Computing (CISC) architecture, meaning it has a large number of instructions that can perform complex operations in a single instruction.
+- Backward Compatibility: x86 architecture maintains backward compatibility, allowing software designed for older x86 processors to run on newer ones.
+- Registers: x86 processors have a set of general-purpose registers, segment registers, and special-purpose registers that are used for various operations.
+- Memory Addressing: x86 supports various addressing modes, allowing for flexible access to memory.
+- Operating Modes: x86 processors can operate in different modes, including real mode, protected mode, and long mode (for 64-bit operation).
+- Wide Adoption: x86 architecture is the dominant architecture for personal computers, with operating systems like Windows, Linux, and macOS supporting it.
 
 ## 3 types of instructions
-TODO: add section
-- arithmetic and logical ops
-- flow control ops
-- memory i/o ops
+### Arithmetic and logical
+Arithmetic operations are used to perform mathematical calculations:
+- Addition: ADD
+- Subtraction: SUB
+- Unsigned multiplication: MUL
+- Signed multiplication: IMUL
+- Unsigned division: DIV
+- Signed division: IDIV
+- Increment: INC
+- Decrement: DEC
+
+Logical operations are used to perform bitwise operations on binary data:
+- AND:
+- OR:
+- XOR:
+- NOT:
+- Shift Operations:
+  - shift left: SHL
+  - shift right: SHR
+  - shift arithmetic left: SAL
+  - shift arithmetic right: SAR
+- Rotate Operations:
+  - rotate left: ROL
+  - rotate right: ROR
+
+### Flow control
+Flow control operations in x86 architecture are instructions that alter the sequence of execution in a program. These operations are essential for implementing control structures such as loops, conditionals, and function calls.
+- Unconditional Jump: JMP
+- Conditional Jumps: \
+  Conditional jumps allow the program to branch based of the state of the EFLAGS register. The CMP instruction is used to compare two values, by subtracting one from the other, without saving the result. This sets the flags in the EFLAGS register, so one of the following conditional jumps can be used:
+  - JE (Jump if Equal): Jumps if the zero flag (ZF) is set.
+  - JNE (Jump if Not Equal): Jumps if the zero flag (ZF) is not set.
+  - JG (Jump if Greater): Jumps if the zero flag (ZF) is clear and the sign flag (SF) is equal to the overflow flag (OF).
+  - JL (Jump if Less): Jumps if the sign flag (SF) is not equal to the overflow flag (OF).
+  - JGE (Jump if Greater or Equal): Jumps if the sign flag (SF) is equal to the overflow flag (OF).
+  - JLE (Jump if Less or Equal): Jumps if the zero flag (ZF) is set or the sign flag (SF) is not equal to the overflow flag (OF).
+- Loop Instructions: \
+Loop instructions are used to create loops in the program:
+  - LOOP: Decrements the CX register (or ECX in 32-bit mode) and jumps to a specified label if CX is not zero.
+  - LOOPZ (or LOOPE): Decrements CX and jumps if CX is not zero and the zero flag (ZF) is set.
+  - LOOPNZ (or LOOPNE): Decrements CX and jumps if CX is not zero and the zero flag (ZF) is not set.
+- Function Calls and Returns: \
+These instructions are used for calling and returning from functions:
+  - CALL: Calls a procedure by pushing the return address onto the stack and jumping to the specified address.
+  - RET: Returns from a procedure by popping the return address from the stack and jumping to that address.
+- Interrupts:
+  - INT: Triggers a software interrupt, which can be used for system calls or to handle exceptions.
+  - IRET: Returns from an interrupt service routine.
+
+### Memory I/O
+- Memory Operations: \
+Memory operations involve reading from and writing to the system's memory. The primary instructions for memory operations include:
+  - MOV: This instruction is used to transfer data between registers, memory locations, and I/O ports.
+  - PUSH: This instruction pushes a value onto the stack.
+  - POP: This instruction pops a value from the stack into a register or memory location.
+  - LEA (Load Effective Address): This instruction loads the effective address of a memory operand into a register.
+- I/O Operations: \
+I/O operations are used to communicate with peripheral devices. In x86 architecture, there are specific instructions for handling I/O:
+  - IN: This instruction reads data from an I/O port into a register.
+  - OUT: This instruction writes data from a register to an I/O port.
+- String Operations: \
+String operations can also be considered memory operations, as they manipulate blocks of memory. Common string instructions include:
+  - MOVS: Moves a string from the source address to the destination address.
+  - CMPS: Compares two strings.
+  - SCAS: Scans a string for a specific value.
+  - LODS: Loads a string from memory into a register.
+  - STOS: Stores a value from a register into a string in memory.
 
 # Programming language generations
 ## 1GL
@@ -158,7 +229,7 @@ There are different types of parsing techniques, including:
 Overall, parsing is a crucial step in understanding and processing both programming languages and natural languages.
 
 # Parsing rules
-Parsing rules are the guidelines or formal specifications that define how a sequence of symbols (such as code or natural language) should be analyzed and structured. These rules determine how to break down the input into its constituent parts and how to interpret their relationships. Parsing rules are often defined using formal grammars, which provide a systematic way to describe the syntax of a language.
+Parsing rules are the guidelines or formal specifications that define how a sequence of symbols (such as code or natural language) should be analyzed and structured. These rules determine how to break down the input into smaller parts and how to interpret their relationships. Parsing rules are often defined using formal grammars, which provide a systematic way to describe the syntax of a language.
 
 Here are some key concepts related to parsing rules:
 - Grammar: A set of rules that defines the structure of a language. It typically consists of:
@@ -175,10 +246,10 @@ Here are some key concepts related to parsing rules:
 
 Overall, parsing rules are essential for accurately interpreting and processing languages, whether they are programming languages or natural languages. They provide the framework for understanding the structure and meaning of the input.
 
-# Abstract Syntax Tree
-A parsing tree, also known as a syntax tree or abstract syntax tree (AST), is a hierarchical tree structure that represents the syntactic structure of a string according to a formal grammar. It visually depicts how the input (such as a sentence in natural language or a piece of code in a programming language) is broken down into its constituent parts based on the parsing rules.
+# Abstract Syntax Tree (intermediate representation)
+An abstract syntax tree (AST), is a hierarchical tree structure that represents the syntactic structure of a string according to a formal grammar. It represents how the input is broken down into its elementary parts based on the parsing rules.
 
-Key Components of a Parsing Tree:
+Key Components of an AST:
 - Nodes: Each node in the tree represents a construct occurring in the input. There are typically two types of nodes:
   - Non-terminal nodes: These represent grammatical constructs defined by the grammar (e.g., expressions, statements).
   - Terminal nodes: These represent the actual symbols from the input (e.g., keywords, operators, identifiers).
@@ -186,19 +257,35 @@ Key Components of a Parsing Tree:
 - Leaves: The terminal nodes at the bottom of the tree, which correspond to the actual input symbols.
 - Branches: The connections between nodes that represent the relationships between different constructs.
 
-Types of Parsing Trees:
+Types of syntax trees:
 - Concrete Syntax Tree: Represents the exact structure of the input, including all syntactic details. It shows every element of the input, including punctuation and whitespace.
 - Abstract Syntax Tree (AST): A simplified version of the concrete syntax tree that omits certain syntactic details. The AST focuses on the logical structure of the input, making it easier to analyze and manipulate for further processing, such as interpretation or compilation.
 
-Intermediate Representation:
-In the context of compilers and interpreters, an intermediate representation (IR) is a data structure or code that represents the program during the compilation process. It serves as a bridge between the high-level source code and the low-level machine code. The parsing tree (or AST) can be considered a form of intermediate representation, as it captures the essential structure and semantics of the input code without being tied to a specific programming language syntax.
+Intermediate Representation: \
+Intermediate representation (IR) is a data structure that represents the program during the compilation process. It serves as a bridge between the high-level source code and the low-level machine code. The AST can be considered a form of intermediate representation, as it captures the essential structure and semantics of the input code without being tied to a specific programming language syntax.
 
-Importance of Parsing Trees and Intermediate Representations:
-- Semantic Analysis: Parsing trees help in understanding the meaning of the input by providing a clear structure to analyze.
-- Code Generation: Intermediate representations are used to generate target code (e.g., machine code) in a more efficient manner.
-- Optimization: Compilers can perform various optimizations on the intermediate representation before generating the final output.
+# Regular Expression
+A regular expression is a sequence of characters that defines a search pattern. It is commonly used for string matching and manipulation.
+Regular expressions can be used to:
+- Search: Find specific patterns within text.
+- Match: Determine if a string conforms to a certain pattern.
+- Replace: Substitute parts of a string that match a pattern with another string.
+- Split: Divide a string into an array of substrings based on a specified pattern.
 
-In summary, parsing trees and intermediate representations are crucial for understanding, analyzing, and transforming code or natural language input, facilitating various stages of processing in compilers, interpreters, and natural language processing systems.
+Basic concepts:
+- Characters: Any literal characater will match themselves.
+- Boolean "or" |: A vertical bar that seperates alternatives.
+- Grouping: Parentheses are used to define groups and precedence of operators
+- Quantification: A quantifier after an element (such as a token, character, or group) specifies how many times the preceding element is allowed to repeat.
+  - ?: The question mark indicates zero or one occurrences of the preceding element.
+  - *: The asterisk indicates zero or more occurrences of the preceding element.
+  - +: The plus sign indicates one or more occurrences of the preceding element.
+  - {n}: The preceding item is matched exactly n times.
+  - {min,}: The preceding item is matched min or more times.
+  - {,max}: The preceding item is matched max or less times.
+  - {min,max}: The preceding item is matched at least min times, but no more that max times.
+- Wildcard: The `.` Wildcard maches any characater.
+These constructions can be combined to form arbitrarily complex expressions.
 
 # LALR parser
 A LALR parser (Look-Ahead LR parser) is a type of bottom-up parser used in compiler design for syntax analysis. It is an extension of the LR parser, which stands for "Left-to-right" and "Rightmost derivation." LALR parsers are particularly popular because they can handle a wide range of programming languages while being more memory-efficient than full LR parsers.
@@ -223,26 +310,3 @@ Applications:
 LALR parsers are widely used in compiler construction and are the basis for many parser generators, such as Yacc (Yet Another Compiler Compiler) and Bison. These tools allow developers to define grammars for programming languages and automatically generate the corresponding LALR parser.
 
 In summary, LALR parsers are a powerful and efficient tool for syntax analysis in compilers, capable of handling a wide variety of programming languages while maintaining a manageable state space.
-
-# Regular Expression
-A regular expression (often abbreviated as regex or regexp) is a sequence of characters that defines a search pattern. It is commonly used for string matching and manipulation.
-Regular expressions can be used to:
-- Search: Find specific patterns within text. For example, you can use regex to search for email addresses, phone numbers, or specific words in a document.
-- Match: Determine if a string conforms to a certain pattern. For instance, you can check if a string is a valid date format or if it contains only digits.
-- Replace: Substitute parts of a string that match a pattern with another string. This is useful for tasks like sanitizing input or formatting text.
-- Split: Divide a string into an array of substrings based on a specified pattern.
-
-Basic concepts:
-- Characters: Any literal characater will match themselves.
-- Boolean "or" |: A vertical bar that seperates alternatives.
-- Grouping: Parentheses are used to define groups and precedence of operators
-- Quantification: A quantifier after an element (such as a token, character, or group) specifies how many times the preceding element is allowed to repeat.
-  - ?: The question mark indicates zero or one occurrences of the preceding element.
-  - *: The asterisk indicates zero or more occurrences of the preceding element.
-  - +: The plus sign indicates one or more occurrences of the preceding element.
-  - {n}: The preceding item is matched exactly n times.
-  - {min,}: The preceding item is matched min or more times.
-  - {,max}: The preceding item is matched max or less times.
-  - {min,max}: The preceding item is matched at least min times, but no more that max times.
-- Wildcard: The `.` Wildcard maches any characater.
-These constructions can be combined to form arbitrarily complex expressions.
