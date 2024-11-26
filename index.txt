@@ -32,10 +32,10 @@ Gyakorlati Rész
         compiler szabályok, utasítások leírása, fordítási szabályok leírása (3-5 old)
         milyen utasításokat használsz? (0.5 old/utasítás)
         mik a szabályok, hogy vannak kiszámolva?
-        
+
     Exe fájlformátum leírása (1old)
-    
+
 - Program felépítése, osztályok, modulok, metódusok, leírni minden egyenként. (1old/modul)
-            
+
 Alternative back-end
 for some simple instruction set (PIC10F320-I/OT) or esp32 or esp8266 or ARM or any
