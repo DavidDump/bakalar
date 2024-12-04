@@ -1,10 +1,12 @@
 # x86 architecture
 some history about the architecture, maybe about the itanium and how Intel was unable to standardize a new ISA despite spending millions on it. readoning about the instructions and why some exist, explain what is the purpose of some instructions. some closing thoughts that summarize the section.
 
+Explain how the architecture works, how instructions are encoded, maybe some datail about x86 thats needed to understand how certaint instructions work.
+
+Mention using intel syntax for assembly.
 ## Registers
 TODO: something about registers
 
-Mention using intet syntax for assembly.
 ## Arithmetic instrucions
 The processor has a component called the ALU (arithmetic logic unit), that is capable of performing basic arithmetic and logical operations on some data. The most basic ones include: addition (ADD), subtraction (SUB), multiplications (MUL), division (DIV). The ADD and SUB operations require two opearands, the source and the destination:
 ```
