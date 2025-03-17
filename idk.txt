@@ -1,0 +1,7 @@
+section name about loops: # Loop for a while
+
+# symbol definition
+symbol name followed by := or :: or : each followed by an expresison
+:= this creates a variable with type derived from the expression that follows
+:: this creates a constant with type derived from the expression that follows
+: this creates a variable with a given type and no innitial value

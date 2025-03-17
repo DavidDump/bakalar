@@ -1,0 +1,5 @@
+coding is trying to order bytes into doing arbitrary stuff that is useful because of some transient conjunction of factors in the real world.
+
+we have developed programming languages because coding in machine language is horrible, and over the decades we've refined them into tools people can use fluently and just directly think in code when they have to make a computer system behave a certain way.
+
+only someone who has never built anything of significant complexity and utility can think that putting natural language encoding between you and the bytes is a net positive.
