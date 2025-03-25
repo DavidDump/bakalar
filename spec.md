@@ -57,24 +57,32 @@ maybes:
 
 
 
+# Introduction Paragraph!!!
 
+our motivation for creating the language were the following:
+inspired by this language, this fmt. 
+
+the details follow
 
 ## Literals
-- integer literals consist of one or more numbers, ex.: `123`
-  - integer literals can be specified in hexadecimal or in binary aswell
+- integer literals consist of one or more digits, ex.: `123`
+  - the plus (`-`) or minus (`-`) signs are not part of an integer literal, they are separate operators
+  - integer literals can be specified in hexadecimal or in binary format as well
     - hexadecimal integer literals are prefixed with a `0x`, ex.: `0xCAFEBABE`
     - binary integer literals are prefixed with a `0b`, ex.: `0b110100`
   - underscores (`_`) can be used inside an integer literal to make them easier to read, ex.: `1_200`, `0xFF_CA`, `0b1101_00110100`
-- floating point literals consist of zero or more numbers followed by a dot (`.`), followed by zero or more numbers, ex.: `3.14`, `10.`, `.5`
-  - if the numbers before the dot (`.`) are ommited the compiler will assume 0 before the dot (`.`)
-  - if the numbers after the dot (`.`) are ommited the compiler will assume 0 after the dot (`.`)
-  - these assumptions mean that the following representations for the floating point literal 0 are all valid: `0.0`, `0.`, `.0`, `.`
+- floating point literals consist of zero or more digits, followed by a dot (`.`), followed by zero or more digits, ex.: `3.14`, `10.`, `.5`
+  - if the digits before the dot (`.`) are ommited the compiler will assume 0 before the dot (`.`)
+  - if the digits after the dot (`.`) are ommited the compiler will assume 0 after the dot (`.`)
+  - these assumptions mean, that the following representations for the floating point literal 0 are all valid: `0.0`, `0.`, `.0`, `.`
 - boolean literals can be one of two values: `true` or `false`
 - string literals open with a double quote (`"`) followed by any number of UTF-8 characters, followed by a closing double quote (`"`), ex.: `"Hello World!"`
   - the backslash (`\`) character followed by another character can be used to instert special character into the string literal:
     - `\n` inserts a newline character
     - `\r` inserts a carriage return character
     - `\t` inserts a tab character
+    - `\"` inserts a double quote character
+    - `\\` inserts a backslash
   - if a string literal spans two or more lines the newline at the end line will also be added to the string literals as if `\n` was used, the same is true for tabs
 - function literals consist of an **argument list**, a **return type list**, and a **function body**
   - the argument list is enclosed in parenthesis (`( ... )`) and contains zero or more arguments, an argument in a name followed by a colon (`:`) and a type, multiple arguments are comma (`,`) separated, ex.: `(number1: u64, number2: u64)`
@@ -106,7 +114,7 @@ maybes:
 Expressions can be single literals, binary expressions or unary expressions. Binary expressions consist of a infix operator and two subexpressions. Unary expressions consist of a prefix operator and a single subexpression.
 
 ## Symbols
-The names of variables and constants are referred to as symbols. A symbol has to start with a letter, followed by any number of letters, numbers on underscores (`_`). The programmer can bind expressions to symbols. Binding a constant symbol uses the double colon (`::`) operator, binding a variable symbol uses the colon-equals (`:=`) operator. Example of binding a constants and a variable symbol:
+The names of variables and constants are referred to as symbols. A symbol has to start with a letter, followed by any number of letters, digits on underscores (`_`). The programmer can bind expressions to symbols. Binding a constant symbol uses the double colon (`::`) operator, binding a variable symbol uses the colon-equals (`:=`) operator. Example of binding a constants and a variable symbol:
 ```
 foo :: 1; // This is a constant symbol
 bar := 2; // This is a variable symbol

@@ -1,0 +1,21 @@
+remarks:
+we write the source code with monospace font; syntax `` in md (backtick)
+the section titles are all (significant words) caps 
+
+you have to write in plural / first person (US, WE) / past tense
+
+In the examples we used the Intel syntax.
+or.
+In the examples we have used the Intel syntax.
+
+but you must use it consistently
+
+lots of examples of source code
+like 
+
+hello world
+euclidian algorithm, 
+factorial recursive and non recursive, etc.
+functions, structures, ....
+
+parsing tree / tokens / etc 
