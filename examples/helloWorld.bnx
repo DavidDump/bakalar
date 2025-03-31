@@ -1,0 +1,6 @@
+// Hello World
+
+main :: () -> u8 {
+    print("Hello World!\n");
+    return 0;
+}

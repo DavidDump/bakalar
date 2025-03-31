@@ -1,4 +1,5 @@
 # Lang Spec
+<!--
 -literals
 types
   int
@@ -46,6 +47,7 @@ compiler directive
   #caller_line
   #caller_func
   #caller_file
+  #no_discard
   ...
 typeof (maybe typeinfo) keyword
   explain runtime type information
@@ -54,30 +56,50 @@ using keyword
 maybes:
   list of all keywords at the begining
   list of all operators at the begining
+-->
 
+Draft of some of the ideas that inspired me to do the language:
+- not opinionated, lets you do what you want
+- native compiled
+- strongly and statically typed
+- not a big idea language, doesnt introduce anything new, just refines existing ideas
+- compile time execution, note: i dont know if i can finish this feature in time
+- using compile time execution, programs can be self contained, no need for build systems
+- joy of programming, programming is a activity that i enjoy doing, when typing in code i dont want to fight with the compiler, once i know what i want to happen i want to be able to describe it as simply as possible and have the compiler do what i want
+- fast compiler time for fast iteration of ideas
 
+The programming language is a strongly statically typed language, that compiles down to native x86 machine code.
 
-# Introduction Paragraph!!!
+Programming is an activity many enjoy doing not just for work but recreationaly aswell. This language aims to make the act of designing software easier by letting the programmer iterate over the code faster than more verbose languages, like C or Java, but also require less bureaucratic bookeeping for a semantically correct program, than languages like Rust or Java.
 
-our motivation for creating the language were the following:
-inspired by this language, this fmt. 
+The programming language is not a "big idea" language. It doesnt introduce any revolutionary concepts to programming language design. It merly aims to refine existing concept so that they are more aligned with what the programmer usually wants to use them for.
+The design aims to allow the programmer to use powerful concepts like generics, without having to play "type tetris", having to figure out what type goes where, when refactoring code.
+The programming language is a collection of ideas the we often implement ourselves when programming in lower level languages that dont provide them out of the box.
 
-the details follow
+No useless busywork, like manually having to dereference pointers in C when after refactoring the code flip-flops from value to pointer or vice versa. Or when coping
+
+The programming language aims to have fast compile times so that features like incremental compilation are not needed. 
+Fast compile times allow the programmer to quicly try out ideas or morph them in some way that gets closer to the solution to the problem that they are currently dealing with.
+
+The main inspiration for the language was the Jai programming language, written by Jonathan Blow. This language is currently in closed beta, meaning its not publicly accesible,
+
+Many features in the language are implemented in userspace, or runtime, as this leaves to compiler behaving like a traditional low level compiler wihtout bloating it, while also allowing better syntax support for all the features. All of these features can be turned off. This also means there is no "voodoo" duiring runtime, and a programmer can implement their own features that behave similarly to native compiler features.
 
 ## Literals
 - integer literals consist of one or more digits, ex.: `123`
-  - the plus (`-`) or minus (`-`) signs are not part of an integer literal, they are separate operators
+  - all integer literals are always positive numbers, signs like plus (`+`) or minus (`-`) are operators and not part of the literal
   - integer literals can be specified in hexadecimal or in binary format as well
     - hexadecimal integer literals are prefixed with a `0x`, ex.: `0xCAFEBABE`
     - binary integer literals are prefixed with a `0b`, ex.: `0b110100`
   - underscores (`_`) can be used inside an integer literal to make them easier to read, ex.: `1_200`, `0xFF_CA`, `0b1101_00110100`
 - floating point literals consist of zero or more digits, followed by a dot (`.`), followed by zero or more digits, ex.: `3.14`, `10.`, `.5`
+  - all floating point literals are always positive numbers, signs like plus (`+`) or minus (`-`) are operators and not part of the literal
   - if the digits before the dot (`.`) are ommited the compiler will assume 0 before the dot (`.`)
   - if the digits after the dot (`.`) are ommited the compiler will assume 0 after the dot (`.`)
   - these assumptions mean, that the following representations for the floating point literal 0 are all valid: `0.0`, `0.`, `.0`, `.`
 - boolean literals can be one of two values: `true` or `false`
 - string literals open with a double quote (`"`) followed by any number of UTF-8 characters, followed by a closing double quote (`"`), ex.: `"Hello World!"`
-  - the backslash (`\`) character followed by another character can be used to instert special character into the string literal:
+  - the backslash (`\`) character followed by another character can be used to instert a special character into the string literal:
     - `\n` inserts a newline character
     - `\r` inserts a carriage return character
     - `\t` inserts a tab character
@@ -86,7 +108,7 @@ the details follow
   - if a string literal spans two or more lines the newline at the end line will also be added to the string literals as if `\n` was used, the same is true for tabs
 - function literals consist of an **argument list**, a **return type list**, and a **function body**
   - the argument list is enclosed in parenthesis (`( ... )`) and contains zero or more arguments, an argument in a name followed by a colon (`:`) and a type, multiple arguments are comma (`,`) separated, ex.: `(number1: u64, number2: u64)`
-  - the return type list is a comma (`,`) separated list of types, the list can be ommited if the function doesnt return anything, ex.: `u64, bool`
+  - the return type list is a comma (`,`) separated list of types, the list can be ommited if the function doesn't return anything, ex.: `u64, bool`
   - the argument list and the return type list are delimited by the arrow symbol (`->`), if the return type list is ommited this symbol can also be ommited
   - the funtion body is a list of statements enclosed in curly braces (`{ ... }`)
   example of a function literal: `(number1: u64, number2: u64) -> u64, bool { ... }`
@@ -104,11 +126,10 @@ the details follow
     - any type: `any` - can hold a value of any type
   - complex (compound?) types include: `struct`, `enum`, `function`, `type`
     - struct type literals start with the keyword `struct` followed by a list of variable or constant declarations enclosed in curly braces (`{ ... }`), ex.: `struct { ... }`
-    - enum type literals start with the keyword `enum` followed by a list of comma (`,`) seperated names enclosed in curly braces (`{ ... }`), ex.: `enum { ... }`
+    - enum type literals start with the keyword `enum` followed by a comma (`,`) seperated list of names enclosed in curly braces (`{ ... }`), ex.: `enum { ... }`
   <!-- - TODO: better explain this section -->
 
 <!-- TODO: function call is also kindof a literal -->
-<!-- TODO: "list of comma (`,`) ..." should be the same wording everywhere if comma is mentioned -->
 
 ## Expressions
 Expressions can be single literals, binary expressions or unary expressions. Binary expressions consist of a infix operator and two subexpressions. Unary expressions consist of a prefix operator and a single subexpression.
@@ -193,7 +214,7 @@ Usually languages use two keywords for iteration: `for` and `while`. Other that 
   - `loop number* in numbers { ... }` - numbers is assumend to be and array, number will be bound to the referance of the Nth element of the array
 <!-- NOTE: maybe clearer names in the last two examples -->
 
-Similarly to the `if` statement, the `loop` body can also have its curly braces (`{ ... }`) ommited if the body only contains one statement. Another similarity with the `if` keyword is that the expression following the `loop` keyword doesnt need to be enclosed in parenthesis (`( ... )`). If parenthesis are provided they are not part of the `loop` statement, instead are part of the expression.
+Similarly to the `if` statement, the `loop` body can also have its curly braces (`{ ... }`) ommited if the body only contains one statement. Another similarity with the `if` keyword is that the expression following the `loop` keyword doesn't need to be enclosed in parenthesis (`( ... )`). If parenthesis are provided they are not part of the `loop` statement, instead are part of the expression.
 
 ### Continue, break
 <!-- TODO: mabye merge with the loops section -->
@@ -268,7 +289,7 @@ map: hashmap(string, u8);
 ```
 
 <!-- TODO: These will get moved somewhere else -->
-## Syntax sugar of Strings and Dynamic Arrays
+## Syntax Sugar of Strings and Dynamic Arrays
 String and dynamic arrays are implemented partially in userspace using structs. When declaring a string or a dynamic array the compiler will rewrite the code to the corresponding structure declaration before parsing.
 String syntax sugar:
 ```
@@ -303,4 +324,41 @@ arr.data[0];
 ```
 
 ## Operators
-###
+<!-- all the operators, mention that there is no impicit casting -->
+### Binary Infix Operators
+Arithmetic operators are:
+- plus (`+`)
+- minus (`-`)
+- multiply (`*`)
+- divide (`/`)
+
+These operators can operate on integer or floating point literals of any size. The left and right side types have to be same in order for the operation to be valid. The resulting type of these operations is the same type as the input left and right side types.
+
+Logical operators are:
+- less than (`<`)
+- greater than (`>`)
+- less than or equal (`<=`)
+- greater than or equal (`>=`)
+
+These operators can operate on integer or floating point literals of any size. Similarly to arithmetic operators the types of the left and right side have to match. The result type of these operations however is a boolean type.
+
+Additional logical operators that operate on different types:
+- equal (`==`)
+- not equal (`!=`)
+
+These two operators can accept any types as operands, compare their equality then result in a boolean type.
+
+Bitwise operators are:
+- shift left (`<<`)
+- shift right (`>>`)
+
+These operators can also operate on any numerical types of any size. The resulting type will be the same type as the left hand side type.
+
+### Unary Prefix Operators
+This language supports two unary operators, one arithmetic and one logical:
+- minus (`-`)
+- not (`!`)
+
+The **not** operator can be used on the boolean type to invert it. The **minus** operator can be used on numereical types. It is worth noting that this operator is not part of the literal, and that its not possible to specify negative numbers as literals. All literal specified are positive, and need to be negated using the **minus** operator if a negative number is required.
+
+<!-- dereference, something to replace ternary operators -->

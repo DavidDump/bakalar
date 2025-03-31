@@ -1,0 +1,12 @@
+// Euclidean Algorithm (GCD)
+
+GCD :: (a: $T, b: T) -> T {
+    #assert_param(isNumber(T), "Can only find the greatest common divisor of a number, not:", T);
+    loop b != 0 {
+        tmp := b
+        b := a % b
+        a := tmp
+    }
+
+    return b;
+}

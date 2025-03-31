@@ -1,0 +1,21 @@
+// Factorial, non recursive
+
+factorial :: (num: $T) -> T {
+    #assert_param(isNumber(T), "Can only compute the factorial of a number, not:", T);
+    result : T = 0;
+    loop num {
+        result = result * num;
+        num = num - 1;
+    }
+
+    return result;
+}
+
+// Factorial, recursive
+
+factorial :: (num: $T) -> T {
+    #assert_param(isNumber(T), "Can only compute the factorial of a number, not:", T);
+    if num == 0 || num == 1 return 1;
+
+    return num * factorial(num - 1);
+}
