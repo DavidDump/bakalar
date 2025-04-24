@@ -320,7 +320,7 @@ arr: DynamicArray(u8);
 // The array access operator `[]` has special behaviour with the dynamic array struct.
 arr[0] = 1;
 // This will be rewrittend as such:
-arr.data[0];
+arr.data[0] = 1;
 ```
 
 ## Operators
