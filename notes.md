@@ -28,86 +28,6 @@ Programming languages can be categorized into several types, including:
 - Interpreted languages: These are executed line-by-line by an interpreter (e.g., Python, JavaScript).
 - Domain-specific languages: These are tailored for specific application domains (e.g., SQL for database queries, HTML for web markup).
 
-# x86 architecture
-x86 architecture is a family of instruction set architectures (ISAs) based on the Intel 8086 microprocessor and its successors. It is widely used in personal computers and servers. The term "x86" originally referred to the 16-bit 8086 and 8088 processors, but it has since evolved to encompass a range of 32-bit and 64-bit architectures, including the 80386 (32-bit) and the x86-64 (64-bit) extensions introduced by AMD.
-
-Key features of x86 architecture include:
-- CISC Design: x86 is a Complex Instruction Set Computing (CISC) architecture, meaning it has a large number of instructions that can perform complex operations in a single instruction.
-- Backward Compatibility: x86 architecture maintains backward compatibility, allowing software designed for older x86 processors to run on newer ones.
-- Registers: x86 processors have a set of general-purpose registers, segment registers, and special-purpose registers that are used for various operations.
-- Memory Addressing: x86 supports various addressing modes, allowing for flexible access to memory.
-- Operating Modes: x86 processors can operate in different modes, including real mode, protected mode, and long mode (for 64-bit operation).
-- Wide Adoption: x86 architecture is the dominant architecture for personal computers, with operating systems like Windows, Linux, and macOS supporting it.
-
-## 3 types of instructions
-### Arithmetic and logical
-Arithmetic operations are used to perform mathematical calculations:
-- Addition: ADD
-- Subtraction: SUB
-- Unsigned multiplication: MUL
-- Signed multiplication: IMUL
-- Unsigned division: DIV
-- Signed division: IDIV
-- Increment: INC
-- Decrement: DEC
-
-Logical operations are used to perform bitwise operations on binary data:
-- AND:
-- OR:
-- XOR:
-- NOT:
-- Shift Operations:
-  - shift left: SHL
-  - shift right: SHR
-  - shift arithmetic left: SAL
-  - shift arithmetic right: SAR
-- Rotate Operations:
-  - rotate left: ROL
-  - rotate right: ROR
-
-### Flow control
-Flow control operations in x86 architecture are instructions that alter the sequence of execution in a program. These operations are essential for implementing control structures such as loops, conditionals, and function calls.
-- Unconditional Jump: JMP
-- Conditional Jumps: \
-  Conditional jumps allow the program to branch based of the state of the EFLAGS register. The CMP instruction is used to compare two values, by subtracting one from the other, without saving the result. This sets the flags in the EFLAGS register, so one of the following conditional jumps can be used:
-  - JE (Jump if Equal): Jumps if the zero flag (ZF) is set.
-  - JNE (Jump if Not Equal): Jumps if the zero flag (ZF) is not set.
-  - JG (Jump if Greater): Jumps if the zero flag (ZF) is clear and the sign flag (SF) is equal to the overflow flag (OF).
-  - JL (Jump if Less): Jumps if the sign flag (SF) is not equal to the overflow flag (OF).
-  - JGE (Jump if Greater or Equal): Jumps if the sign flag (SF) is equal to the overflow flag (OF).
-  - JLE (Jump if Less or Equal): Jumps if the zero flag (ZF) is set or the sign flag (SF) is not equal to the overflow flag (OF).
-- Loop Instructions: \
-Loop instructions are used to create loops in the program:
-  - LOOP: Decrements the CX register (or ECX in 32-bit mode) and jumps to a specified label if CX is not zero.
-  - LOOPZ (or LOOPE): Decrements CX and jumps if CX is not zero and the zero flag (ZF) is set.
-  - LOOPNZ (or LOOPNE): Decrements CX and jumps if CX is not zero and the zero flag (ZF) is not set.
-- Function Calls and Returns: \
-These instructions are used for calling and returning from functions:
-  - CALL: Calls a procedure by pushing the return address onto the stack and jumping to the specified address.
-  - RET: Returns from a procedure by popping the return address from the stack and jumping to that address.
-- Interrupts:
-  - INT: Triggers a software interrupt, which can be used for system calls or to handle exceptions.
-  - IRET: Returns from an interrupt service routine.
-
-### Memory I/O
-- Memory Operations: \
-Memory operations involve reading from and writing to the system's memory. The primary instructions for memory operations include:
-  - MOV: This instruction is used to transfer data between registers, memory locations, and I/O ports.
-  - PUSH: This instruction pushes a value onto the stack.
-  - POP: This instruction pops a value from the stack into a register or memory location.
-  - LEA (Load Effective Address): This instruction loads the effective address of a memory operand into a register.
-- I/O Operations: \
-I/O operations are used to communicate with peripheral devices. In x86 architecture, there are specific instructions for handling I/O:
-  - IN: This instruction reads data from an I/O port into a register.
-  - OUT: This instruction writes data from a register to an I/O port.
-- String Operations: \
-String operations can also be considered memory operations, as they manipulate blocks of memory. Common string instructions include:
-  - MOVS: Moves a string from the source address to the destination address.
-  - CMPS: Compares two strings.
-  - SCAS: Scans a string for a specific value.
-  - LODS: Loads a string from memory into a register.
-  - STOS: Stores a value from a register into a string in memory.
-
 # Programming language generations
 ## 1GL
 A first-generation programming language (1GL) refers to the earliest type of programming languages, which are essentially machine languages. These languages consist of binary code (0s and 1s) that the computer's central processing unit (CPU) can directly execute.
@@ -203,7 +123,7 @@ The operation of a Turing machine proceeds as follows:
 
 Turing machines are significant for several reasons:
 - Computability: They provide a formal framework for understanding what problems can be solved algorithmically. A problem is considered computable if there exists a Turing machine that can solve it.
-- Church-Turing Thesis: This thesis posits that any function that can be computed by an algorithm can be computed by a Turing machine, establishing it as a fundamental model of computation.
+- Church-Turing Thesis: This thesis proposes that any function that can be computed by an algorithm can be computed by a Turing machine, establishing it as a fundamental model of computation.
 - Complexity Theory: Turing machines are used to study the complexity of algorithms and the classification of problems based on their computational difficulty.
 
 While Turing machines are abstract and not used for practical computation, they are a foundational concept in computer science and theoretical computer science, influencing the design of modern computers and programming languages.
@@ -305,8 +225,7 @@ Disadvantages of LALR Parsers:
 - Conflict Handling: While LALR parsers can handle many conflicts, they may still encounter situations where they cannot resolve ambiguities, leading to parsing errors.
 - Grammar Limitations: Some grammars that can be parsed by LR(1) parsers may not be suitable for LALR parsing due to the merging of states.
 
-Applications:
-
+## Applications:
 LALR parsers are widely used in compiler construction and are the basis for many parser generators, such as Yacc (Yet Another Compiler Compiler) and Bison. These tools allow developers to define grammars for programming languages and automatically generate the corresponding LALR parser.
 
 In summary, LALR parsers are a powerful and efficient tool for syntax analysis in compilers, capable of handling a wide variety of programming languages while maintaining a manageable state space.
