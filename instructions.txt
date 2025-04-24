@@ -18,4 +18,4 @@ euclidian algorithm,
 factorial recursive and non recursive, etc.
 functions, structures, ....
 
-parsing tree / tokens / etc 
+parsing tree / tokens / etc
