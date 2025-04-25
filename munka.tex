@@ -1,0 +1,217 @@
+\documentclass[a4paper,oneside,onecolumn,12pt]{LegrandOrangeBook}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\def\magyarOptions{chapterhead=unchanged}
+\usepackage[magyar]{babel}
+\usepackage{longtable}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{minted}
+\usepackage{svg}
+\usepackage{ragged2e}
+\usepackage{markdown}
+\usepackage[SC5b,ISBN=000-00-000-0000-0]{ean13isbn}
+
+\newcommand{\chpt}[1]{\chapter*{#1}\addcontentsline{toc}{section}{#1}}
+
+% TODO: finish?
+\hypersetup{
+    pdftitle={A szakdolgozat címe},            % Title field
+    pdfauthor={Szerző Neve},                   % Author field
+    pdfsubject={Szakdolgozat v. Diplomamunka}, % Subject field
+    pdfkeywords={key1, key2, key3, key4},      % Keywords
+    pdfcreator={LaTeX},                        % Content creator field
+}
+
+% Define the color used for highlighting throughout the book
+\definecolor{ocre}{RGB}{243, 102, 25}
+% Default whitespace from the top of the page to the chapter title on chapter pages
+\chapterspaceabove{6.5cm}
+% Default amount of vertical whitespace from the top margin to the start of the text on chapter pages
+\chapterspacebelow{6.75cm}
+
+\onehalfspacing
+\frenchspacing
+
+\hypersetup{
+    % pdftitle={A szakdolgozat címe}
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+\ExecuteBibliographyOptions{sorting=none}
+\addbibresource{manuscript.bib}
+
+\begin{document}
+
+% Title page
+\thispagestyle{empty}
+% TODO: finish?
+\begin{minipage}[c][\textheight][c]{\textwidth}
+    {
+        \centering
+        \includegraphics[keepaspectratio,width=3cm]{SelyeBanner.png} \\
+        \vskip0.5cm
+        {\LARGE UNIVERZITA J. SELYEHO} \\
+        \vskip0.5cm
+        {\LARGE SELYE JÁNOS EGYETEM} \\
+        \vskip0.5cm
+        {\large Fakulta ekonómie a informatiky} \\
+        \vskip0.5cm
+        {\large Gazdaságtudományi és Informatikai Kar} \\
+        \vfill
+        {\Huge A szakdolgozat címe} \\
+        Szakdolgozat v. Diplomamunka \\
+        Szerző Neve \\
+        \ISBN \\
+        \hfill\the\year{}, Komárom\hfill
+    }
+\end{minipage}
+\cleardoublepage
+
+\begingroup
+\makeatletter
+\let\ps@plain\ps@empty
+% TODO: finish?
+\begin{minipage}[c][\textheight][c]{\textwidth}
+	{
+        \centering
+	    {\large UNIVERZITA J. SELYEHO\\SELYE JÁNOS EGYETEM} \\
+	    \vskip0.5cm
+        {\ NÁZOV FAKULTY\\Fakulta ekonómie a informatiky\\Gazdaságtudományi és Informatikai Kar} \\
+        \vfill
+        {\Large NÁZOV PRÁCE\\Vytvorenie softvérového interpretera pre CHIP-8 } \\
+        \vfill
+        \thispagestyle{empty}
+        \begin{tabular}{ll}
+            Študijný program:    & Aplikovaná informatika \\
+            Tanulmányi program:  & Alkalmazott Informatika \\
+            Študijný odbor:      & Informatika \\
+            Tanulmányi szak:     & Informatika \\
+            Školiteľ:            & Tanár Neve \\
+            Témavezető:          & Tanár Neve \\
+            Konzultant:          & Tanár Neve \\
+            Konzulens:           & Tanár Neve \\
+            Školiace pracovisko: & Katedra informatiky \\
+            Tanszék megnevezése: & Informatikai Tanszék \\
+        \end{tabular}
+        \vfill
+        Označenie typu práce - Szakdolgozat v. Diplomamunka \\
+        Szerző Neve \\
+        \ISBN \\
+        \hfill\the\year{}, Komárno\hfill
+	}
+\end{minipage}
+\endgroup
+
+{
+    \hspace*{-2cm}
+    % \includegraphics[keepaspectratio, width=17cm]{./zadanie-zp_17422.pdf}
+    Ide jön az aláírt témakiírás
+}
+
+\tableofcontents
+\pagebreak
+\listoffigures
+\addcontentsline{toc}{section}{Ábrák jegyzéke}
+\pagebreak
+
+% The begining of the contents
+% \chapterimage{kep/header.png}
+
+\chpt{Feladatkiírás}
+A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével.
+
+% \chapterimage{kep/header2.png}
+\chpt{Opis práce}
+Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorovými programami. Autor vyvinie vlastný programovací jazyk (Benex). Pre tento programovací jazyk autor vyvíja kompilátor, ktorý obsahuje frontend (parser) a backend (kompilátor). Kompilátor vytvára spustiteľné súbory. Autor demonštruje kompilátor na niekoľkých príkladoch programov.
+
+\pagebreak
+
+% \chapterimage{kep/header3.png}
+\chpt{Abstrakt}\label{sec:abstrakt}
+Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorovými programami. Autor vyvinie vlastný programovací jazyk (Benex). Pre tento programovací jazyk autor vyvíja kompilátor, ktorý obsahuje frontend (parser) a backend (kompilátor). Kompilátor vytvára spustiteľné súbory. Autor demonštruje kompilátor na niekoľkých príkladoch programov.
+
+\textbf{Kľúčové slová: klúč1, klúč2, klúč3}
+
+\pagebreak
+
+% \chapterimage{kep/header4.png}
+\chpt{Absztrakt}\label{sec:absztrakt}
+A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével.
+
+\textbf{Kulcsszavak: kulcs1, kulcs2, kulcs3}
+
+\pagebreak
+
+% \chapterimage{kep/header.png}
+\chpt{Abstract}
+The aim of this thesis is to create a programming language with compiler and sample programs. The author develops an own programming language (Benex). For this programming language, the author develops a compiler, which includes a frontend (parser) and a backend (compiler). The compiler produces executable files. The author demonstrates the compiler with some example programs.
+
+\textbf{Keywords: key1, key2, key3}
+
+% TODO: intro here
+\chapter*{Bevezetés}
+\addcontentsline{toc}{chapter}{Bevezetés}
+\markboth{}{\sffamily\normalsize{Bevezetés}}
+\begin{eBox}
+    Intro goes here
+\end{eBox}
+
+% Begining of the main content
+\chapter{Language Theory}
+% \section{Formal Languages}
+% \section{Programming Languages}
+% \section{Programming language generations}
+% \subsection{1GL}
+% \subsection{2GL}
+% \subsection{3GL}
+% \subsection{4GL}
+% \subsection{5GL}
+% \section{Turing Machine}
+% \subsection{Turing completeness}
+% \section{Parsing}
+% \section{Parsing rules}
+% \section{Abstract Syntax Tree (Intermediate Representation)}
+% \section{Regular Expression}
+% \section{LALR parser}
+% \subsection{Applications}
+\markdownInput{notes.md}
+
+% \chapterimage{kep/header2.png}
+\chapter{Gyakorlati rész}
+\markdownInput{spec.md}
+
+% \chapterimage{kep/header.png}
+\chapter*{Befejezés}
+\addcontentsline{toc}{chapter}{Befejezés}
+Some conclusion of the work.
+
+\pagebreak
+
+% \chapterimage{kep/header3.png}
+\chapter*{Resumé}
+\addcontentsline{toc}{chapter}{Resumé}
+\markboth{}{\sffamily\normalsize{Resumé}}
+Some final resume of the work.
+
+% TODO: add this once there is something in the bibliography
+% \printbibliography[title=Hivatkozások]
+% \addcontentsline{toc}{chapter}{Hivatkozások}
+
+\pagebreak
+\thispagestyle{empty}
+
+\mbox{}
+\vfill
+
+% \begin{Center}
+%     \mbox{\vskip1cm}
+%     \EANisbn
+% \end{Center}
+
+\end{document}
