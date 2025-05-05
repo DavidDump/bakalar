@@ -85,7 +85,7 @@ The main inspiration for the language was the Jai programming language, written 
 
 Many features in the language are implemented in userspace, or runtime, as this leaves to compiler behaving like a traditional low level compiler wihtout bloating it, while also allowing better syntax support for all the features. All of these features can be turned off. This also means there is no "voodoo" duiring runtime, and a programmer can implement their own features that behave similarly to native compiler features.
 
-## Literals
+### Literals
 - integer literals consist of one or more digits, ex.: `123`
   - all integer literals are always positive numbers, signs like plus (`+`) or minus (`-`) are operators and not part of the literal
   - integer literals can be specified in hexadecimal or in binary format as well
@@ -131,10 +131,10 @@ Many features in the language are implemented in userspace, or runtime, as this 
 
 <!-- TODO: function call is also kindof a literal -->
 
-## Expressions
+### Expressions
 Expressions can be single literals, binary expressions or unary expressions. Binary expressions consist of a infix operator and two subexpressions. Unary expressions consist of a prefix operator and a single subexpression.
 
-## Symbols
+### Symbols
 The names of variables and constants are referred to as symbols. A symbol has to start with a letter, followed by any number of letters, digits on underscores (`_`). The programmer can bind expressions to symbols. Binding a constant symbol uses the double colon (`::`) operator, binding a variable symbol uses the colon-equals (`:=`) operator. Example of binding a constants and a variable symbol:
 ```
 foo :: 1; // This is a constant symbol
@@ -175,9 +175,9 @@ foo: bool;
 ```
 <!-- TODO: reassign -->
 
-## Control Flow
+### Control Flow
 <!-- if, loop, defer, break, continue -->
-### If
+#### If
 The `if` keyword is mostly the same as other programming languages, as it is followed by a condition and a body that gets executed if the condition evaluates to `true`. The condition is a expression, and the body is a list of statements enclosed in curly braces (`{ ... }`). If the body only contains one statement the curly braces (`{ ... }`) can be ommited. One notable difference however is that the parenthesis (`( ... )`) around the condition are optional, howerver if parenthesis are present they are part of the expression not the `if` statement. An `if` block can optionaly be followed by either an `else if` or an `else` block. An `else if` block also requires a condition before the body. Examples:
 ```
 foo := 1;
@@ -199,7 +199,7 @@ if foo == 999 {
 }
 ```
 
-### Loop for a while
+#### Loop for a while
 <!-- TODO: maybe write more about why not `for`, `while` -->
 Usually languages use two keywords for iteration: `for` and `while`. Other that the slightly different syntax there is very little difference between these two constructs. This programming language only has one, the `loop` keyword. A loop stantement starts with a `loop` keyword, followed by a optional expression and a body. There a multiple ways to use this keyword, each with its own unsique behaviour:
 - Loop without a condition, this case is an infinite loop, ex.:
@@ -216,33 +216,33 @@ Usually languages use two keywords for iteration: `for` and `while`. Other that 
 
 Similarly to the `if` statement, the `loop` body can also have its curly braces (`{ ... }`) ommited if the body only contains one statement. Another similarity with the `if` keyword is that the expression following the `loop` keyword doesn't need to be enclosed in parenthesis (`( ... )`). If parenthesis are provided they are not part of the `loop` statement, instead are part of the expression.
 
-### Continue, break
-<!-- TODO: mabye merge with the loops section -->
+#### Continue, break
+<!-- TODO: maybe merge with the loops section -->
 <!-- TODO: decide if i want to add named loops and mention continuing and breaking out of names loops -->
 Similar to most languages, the `continue` and `break` keywords are present in this programming language. They behave as expected, `continue` skips to the next iteration of a loop, `break` ends the loops early.
 
 <!-- TODO: move somewhere where this makes sense -->
 This is a semicolon language, meaning there is a semicolon (`;`) at the end of each statement.
 
-### Defer
+#### Defer
 The `defer` keyword can be used to specify code that should be executed at the end of the scope. It is followed by a semicolon (`;`) separated list of statements enclosed in curly braces (`{ ... }`). Like all other keywords that have a body, the enclosing curly braces (`{ ... }`) can be ommited if the body only contains one statement. The statments are executed in reverse order in which they were specified.
 
-## Functions
+### Functions
 <!-- default values, multiple return types, overloading, variadics, generics, #assert_param -->
-### Default values
+#### Default values
 Function parameters can have default values that will be used in case the function is called without providing a value for that parameter. Default values are specified using an equals (`=`) and the value, after the parameter type, ex.: `(number: u32 = 10) -> u32 { ... }`. When calling a function with a default parameter in the middle of the parameter list, it is possible to simply ommit the value of the parameter in the middle of the argument list, ex.: `foo(arg1,, arg3)`. This example will pass symbols `arg1` as the fist argument and `arg3` as the third argument. The second parameter will use its default value. If a default value is provide the type of the parameter can be ommited, as the value can be used to infer the type.
 
-### Return values
+#### Return values
 When a function has multiple return values, the `return` keyword needs to be followed by a comma (`,`) separated list of expressions. The list of return types is similar to the parameter list of the function literal, because each return type can also be named and can have a default value. If the return type is named the symbol is declared at the begining of the function and can be assigned to, if it also has a default value it will immediatly be assigned that value. If named return types are used all return types have to be named. Once all the return symbols have a value assigned to them, the `return` keyword can be used without any expressions.
 <!-- TODO: examples -->
 
-### Overloading
+#### Overloading
 When binding function literals to a constant symbol, there is a special rule, where multiple functions can be bound to the same symbol as long as the parameter list differs in its types.
 
-### Variadics
+#### Variadics
 Variadic functions like `printf` in C can take any number of arguments of any type. In the case of `printf` the number and type of arguments is passed to the function by the format string. In this programming language variadic function parameters are specified by replacing the type of the last parameter with a tripple dot (`...`), ex.: `(fmt: string, args: ...) { ... }`. Variadic parameters cannot have a default value, and only one variadic parameter can be specified. Inside the function body the symbol bound to the variadic parameter will have a type of array of any.
 
-### Generics
+#### Generics
 A generic version of a function can be specified by replacing the type of one or more parameters, with a symbol name prefixed by a dollar sign (`$`), this will declare a generic parameter, ex.: `(arg: $T)`. When calling the function the programmer can pass an argument of any type to the generic parameter. Inside the function body the symbol prefix by a dollar sign (`$`) will be bound to the type that the calling argument had. Later uses of this symbol do not need the dollar sign (`$`) prefix. This symbol can be used both in the function declaration and body, ex.: `(arg1: $T, arg2: T) -> T { ... }`.
 When declaring a generic function with `$T`, `T` will only be bound to the base type, not the pointer type, so `u32*` would result in `T == u32`, if we expect a pointer it needs to be specified explicitly, like this `$T*`.
 
@@ -273,9 +273,9 @@ add :: (num1: $T, num2: T) -> T {
 }
 ```
 
-<!-- ### Validate directive -->
+<!-- #### Validate directive -->
 
-## Structs
+### Structs
 Structs in this language can be parameterized. Structure parameter l follow the `struct` keyword, and have all the same properties of function parameter lists. The paremeter then can be used inside the structure body, ex.:
 ```
 hashmap :: struct (key: type, value: type) {
@@ -289,7 +289,7 @@ map: hashmap(string, u8);
 ```
 
 <!-- TODO: These will get moved somewhere else -->
-## Syntax Sugar of Strings and Dynamic Arrays
+### Syntax Sugar of Strings and Dynamic Arrays
 String and dynamic arrays are implemented partially in userspace using structs. When declaring a string or a dynamic array the compiler will rewrite the code to the corresponding structure declaration before parsing.
 String syntax sugar:
 ```
@@ -323,9 +323,9 @@ arr[0] = 1;
 arr.data[0] = 1;
 ```
 
-## Operators
+### Operators
 <!-- all the operators, mention that there is no impicit casting -->
-### Binary Infix Operators
+#### Binary Infix Operators
 Arithmetic operators are:
 - plus (`+`)
 - minus (`-`)
@@ -354,7 +354,7 @@ Bitwise operators are:
 
 These operators can also operate on any numerical types of any size. The resulting type will be the same type as the left hand side type.
 
-### Unary Prefix Operators
+#### Unary Prefix Operators
 This language supports two unary operators, one arithmetic and one logical:
 - minus (`-`)
 - not (`!`)
