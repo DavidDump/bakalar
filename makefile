@@ -1,8 +1,8 @@
 munka.pdf:
-	pdflatex --shell-escape -output-directory build munka.tex
-	move build\munka.pdf .
+	pdflatex -shell-escape -silent munka.tex
 
 .PHONY: clean
 clean:
-	del munka.aux munka.bcf munka.bib munka.idx munka.lof munka.log munka.run.xml munka.toc
-	del munka.pdf
+	del /Q *.aux *.log *.lua *.bcf *.idx *.lof *.xml *.toc *.pdf *.bbl *.blg
+	rmdir /Q /S _markdown_munka
+	rmdir /Q /S _minted

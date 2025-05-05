@@ -1,2 +1,13 @@
-build/
+_markdown_*/
+_minted/
+*.aux
+*.log
+*.lua
+*.bcf
+*.idx
+*.lof
+*.xml
+*.toc
+*.bbl
+*.blg
 *.pdf
