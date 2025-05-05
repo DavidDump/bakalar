@@ -1,4 +1,4 @@
-# Lang Spec
+## Lang Spec
 <!--
 -literals
 types
@@ -299,8 +299,10 @@ String :: struct {
     data: u8*;
 }
 
-// When declaring a string the contents of the literal will be stored in the .data section of the binary
-// The compiler will store the pointer the string bytes in the `data` field, and the bytes count in the `length` field
+// When declaring a string the contents of the literal
+// will be stored in the .data section of the binary
+// The compiler will store the pointer the string bytes
+// in the `data` field, and the bytes count in the `length` field
 ```
 Dynamic array syntax sugar:
 ```
@@ -317,7 +319,8 @@ arr: u8[...];
 // This declaration will be rewritten as such:
 arr: DynamicArray(u8);
 
-// The array access operator `[]` has special behaviour with the dynamic array struct.
+// The array access operator `[]`
+// has special behaviour with the dynamic array struct.
 arr[0] = 1;
 // This will be rewrittend as such:
 arr.data[0] = 1;
