@@ -12,6 +12,8 @@
 \usepackage{markdown}
 \usepackage[SC5b,ISBN=000-00-000-0000-0]{ean13isbn}
 
+\markdownSetup{pipeTables,tableCaptions}
+
 \newcommand{\chpt}[1]{\chapter*{#1}\addcontentsline{toc}{section}{#1}}
 
 % TODO: finish?
@@ -159,32 +161,20 @@ The aim of this thesis is to create a programming language with compiler and sam
 \addcontentsline{toc}{chapter}{Bevezetés}
 \markboth{}{\sffamily\normalsize{Bevezetés}}
 \begin{eBox}
-    Intro goes here
+    This is a comment that i might want to add ?? i guess
 \end{eBox}
+This is the place where i write about the intro...
 
 % Begining of the main content
 \chapter{Language Theory}
-% \section{Formal Languages}
-% \section{Programming Languages}
-% \section{Programming language generations}
-% \subsection{1GL}
-% \subsection{2GL}
-% \subsection{3GL}
-% \subsection{4GL}
-% \subsection{5GL}
-% \section{Turing Machine}
-% \subsection{Turing completeness}
-% \section{Parsing}
-% \section{Parsing rules}
-% \section{Abstract Syntax Tree (Intermediate Representation)}
-% \section{Regular Expression}
-% \section{LALR parser}
-% \subsection{Applications}
 \markdownInput{notes.md}
+\markdownInput{x86.md}
 
 % \chapterimage{kep/header2.png}
-\chapter{Gyakorlati rész}
+\chapter{The Compiler}
+\markdownInput{structure.md}
 \markdownInput{spec.md}
+\markdownInput{functions.md}
 
 % \chapterimage{kep/header.png}
 \chapter*{Befejezés}
