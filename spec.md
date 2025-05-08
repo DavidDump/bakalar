@@ -1,4 +1,4 @@
-## Lang Spec
+## Language Specification
 <!--
 -literals
 types
@@ -35,19 +35,20 @@ operators
   something to replace ternary operators
 context - i quite like the context in odin might implement something similar
 compiler directive
-  #run
-  #if
-  #char
+  #run - compile time execution, if the code inside return a value, that value will be inserted in the source code
+  #if - compile time conditional compilation
+  #char - specify the ascii value of a single character, argument in a string with length one, compiler error if length not one
   #assert_param
-  #type - maybe if need
-  #import
+  #type - return the type of a symbol, maybe if need
+  #import - paste the content of the file here, not just bnx file, similar to c
+  #load - merge the AST of the target source file with the current file, only bnx files
   #extern
-  #private
-  #public
-  #caller_line
-  #caller_func
-  #caller_file
-  #no_discard
+  #private - make single symbol private, some other directive (dont know name yet), that makes all future symbol declarations in this file private
+  #public - make single symbol public, some other directive (dont know name yet), that makes all future symbol declarations in this file public
+  #caller_line - used in function default value, line the function was called from
+  #caller_func - used in function default value, parent function the current function was called from
+  #caller_file - used in function default value, file name the function was called from
+  #no_discard - mark a return value that it needs to be assigned to a variable by the caller
   ...
 typeof (maybe typeinfo) keyword
   explain runtime type information
@@ -57,33 +58,6 @@ maybes:
   list of all keywords at the begining
   list of all operators at the begining
 -->
-
-Draft of some of the ideas that inspired me to do the language:
-- not opinionated, lets you do what you want
-- native compiled
-- strongly and statically typed
-- not a big idea language, doesnt introduce anything new, just refines existing ideas
-- compile time execution, note: i dont know if i can finish this feature in time
-- using compile time execution, programs can be self contained, no need for build systems
-- joy of programming, programming is a activity that i enjoy doing, when typing in code i dont want to fight with the compiler, once i know what i want to happen i want to be able to describe it as simply as possible and have the compiler do what i want
-- fast compiler time for fast iteration of ideas
-
-The programming language is a strongly statically typed language, that compiles down to native x86 machine code.
-
-Programming is an activity many enjoy doing not just for work but recreationaly aswell. This language aims to make the act of designing software easier by letting the programmer iterate over the code faster than more verbose languages, like C or Java, but also require less bureaucratic bookeeping for a semantically correct program, than languages like Rust or Java.
-
-The programming language is not a "big idea" language. It doesnt introduce any revolutionary concepts to programming language design. It merly aims to refine existing concept so that they are more aligned with what the programmer usually wants to use them for.
-The design aims to allow the programmer to use powerful concepts like generics, without having to play "type tetris", having to figure out what type goes where, when refactoring code.
-The programming language is a collection of ideas the we often implement ourselves when programming in lower level languages that dont provide them out of the box.
-
-No useless busywork, like manually having to dereference pointers in C when after refactoring the code flip-flops from value to pointer or vice versa. Or when coping
-
-The programming language aims to have fast compile times so that features like incremental compilation are not needed. 
-Fast compile times allow the programmer to quicly try out ideas or morph them in some way that gets closer to the solution to the problem that they are currently dealing with.
-
-The main inspiration for the language was the Jai programming language, written by Jonathan Blow. This language is currently in closed beta, meaning its not publicly accesible,
-
-Many features in the language are implemented in userspace, or runtime, as this leaves to compiler behaving like a traditional low level compiler wihtout bloating it, while also allowing better syntax support for all the features. All of these features can be turned off. This also means there is no "voodoo" duiring runtime, and a programmer can implement their own features that behave similarly to native compiler features.
 
 ### Literals
 - integer literals consist of one or more digits, ex.: `123`
@@ -124,7 +98,7 @@ Many features in the language are implemented in userspace, or runtime, as this 
     - boolean type: `bool`
     - string type: `string`
     - any type: `any` - can hold a value of any type
-  - complex (compound?) types include: `struct`, `enum`, `function`, `type`
+  - user defined types include: `struct`, `enum`, `function`, `type`
     - struct type literals start with the keyword `struct` followed by a list of variable or constant declarations enclosed in curly braces (`{ ... }`), ex.: `struct { ... }`
     - enum type literals start with the keyword `enum` followed by a comma (`,`) seperated list of names enclosed in curly braces (`{ ... }`), ex.: `enum { ... }`
   <!-- - TODO: better explain this section -->
@@ -159,7 +133,7 @@ All symbols have a type. The type of a symbol is either explicitly specified by 
 ```
 foo : u32 = 42;
 ```
-If no type if provided the compiler will try to infer the type. Simple expressions like `true` or `"Example"`, that can only be one type will be infered as such (???). Numbers like integers and floating points that can have a varying level of precision will always be infered as the highes level of precision possible, ie.: `s64`, `f64`. Complex types like structs and enums that implicitly specify their type in the literal value, can have the type ommited from the literal value if the symbol already has a explicitly specified type. Example of this behaviour:
+If no type if provided the compiler will try to infer the type. Simple expressions like `true` or `"Example"`, that can only be one type will be infered as such. Numbers like integers and floating points that can have a varying level of precision will always be infered as the highes level of precision possible, ie.: `s64`, `f64`. Complex types like structs and enums that implicitly specify their type in the literal value, can have the type ommited from the literal value if the symbol already has a explicitly specified type. Example of this behaviour:
 <!-- TODO: // Vec2 :: struct { x, y: f64; } -->
 ```
 Vec2 :: struct {
@@ -268,12 +242,39 @@ isNumber :: (param: Type) -> bool {
 }
 
 add :: (num1: $T, num2: T) -> T {
-    #assert_param(isNumber(T), "Parameter types need to be numbers, provided: %", T);
+    #assert_param(isNumber(T),
+                  "Parameter type is not a number: %\n", T);
     return num1 + num2;
 }
 ```
 
-<!-- #### Validate directive -->
+<!--
+#### Validate directive
+This directive can be used to specify a function that should be called when the compiler is typechecking a function. The signature of the validation function is as follows: `(args: ...) -> (result: bool, msg: string)`. The `args` parameter is an array of arguments passed to the function that is being validated. The `result` boolean is used to indicate whether the typecchecking of the funcion succeeded. If this is false the `msg` value is used as the error messege that will be displayed to the user. The following example will demonstrate how this directive can be used to validate the number of arguments for the print function call.
+```
+print_validate :: (args: ...) -> (result: bool, msg: string) {
+    // this assert indicates incorrect use of the #validate directive, not a failed validation
+    assert(args.length > 0,
+           "can only validate function with at least one arg");
+
+    format_arg := args[0];
+    args = args[1..args.length - 1];
+
+    expected_arg_count := 0;
+    loop c in format_arg {
+        if c == '%' {
+            expected_arg_count += 1;
+        }
+    }
+
+    result = expected_arg_count == args.length - 1;
+    msg = formatf("Incorrect number of arguments provided, the format specifier expects: %, provided: %\n", expected_arg_count, args.length - 1);
+    return;
+}
+
+print :: #validate(print_validate) (format: string, args: ...) { ... }
+```
+-->
 
 ### Structs
 Structs in this language can be parameterized. Structure parameter l follow the `struct` keyword, and have all the same properties of function parameter lists. The paremeter then can be used inside the structure body, ex.:
@@ -327,7 +328,7 @@ arr.data[0] = 1;
 ```
 
 ### Operators
-<!-- all the operators, mention that there is no impicit casting -->
+<!-- TODO: all the operators, mention that there is no impicit casting -->
 #### Binary Infix Operators
 Arithmetic operators are:
 - plus (`+`)
@@ -364,4 +365,4 @@ This language supports two unary operators, one arithmetic and one logical:
 
 The **not** operator can be used on the boolean type to invert it. The **minus** operator can be used on numereical types. It is worth noting that this operator is not part of the literal, and that its not possible to specify negative numbers as literals. All literal specified are positive, and need to be negated using the **minus** operator if a negative number is required.
 
-<!-- dereference, something to replace ternary operators -->
+<!-- TODO: dereference, pointer, something to replace ternary operators -->

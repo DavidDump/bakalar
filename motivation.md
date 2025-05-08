@@ -1,0 +1,14 @@
+## Motivation and Influences
+The development of Benex has been motivated by both personal programming experiences and the study of existing languages. At its core, the language is designed to be unopinionated, allowing programmers to work in a manner that suits their needs, without being constrained by rigid paradigms. It is a strongly and statically typed system that translates directly into native x86 machine code. 
+
+While Benex does not claim to introduce groundbreaking paradigms in programming language design, it seeks to refine and consolidate existing ideas. The central aim is to simplify the process of expressing intent in code, thereby reducing the syntactic overhead and cognitive load typically associated with more verbose languages such as C or Java. In comparison to systems-level languages like Rust or C++, Benex minimizes bureaucratic constraints, allowing for a more fluid and rapid iteration process while maintaining semantic correctness.
+
+One of the key design principles is to align with the intrinsic joy found in the act of programming. Benex is built with the intent that, once a developer’s desired outcome is clear, the expression of that concept should be as straightforward as possible. This is achieved by incorporating modern language constructs such as generics, designed in a way that prevents the challenges of complex type inference or "type tetris" during code refactoring. In doing so, it encapsulates many of the ergonomic improvements that programmers commonly implement manually when using lower-level languages.
+
+Benex also strives to eliminate unnecessary administrative overhead, such as the manual pointer dereferencing often required in C when transitioning between values and pointers, or the complications that arise when refactoring functions to change argument passing semantics from value to reference. 
+
+A significant inspiration for this project is the Jai programming language by Jonathan Blow, whose work (although currently in closed beta) and publicly available documentation have had a profound influence on the design philosophy of Benex. 
+
+Furthermore, a deliberate architectural choice has been made to implement many features in user space or within the runtime environment. This design allows the compiler to remain lean and focused on traditional low-level compilation responsibilities, while still providing sophisticated and expressive syntax support. Importantly, these features are modular and can be disabled. This allows developers to implement custom functionalities that behave in a manner analogous to native compiler features, thereby maintaining transparency and control.
+
+Benex represents a synthesis of well-established practices and thoughtful design refinements aimed at enhancing the programming experience. It is not intended as a revolutionary departure but rather as an evolution towards a more intuitive and efficient coding paradigm.
