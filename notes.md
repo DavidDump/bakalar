@@ -121,7 +121,7 @@ Here are some key concepts related to parsing rules:
 
 Overall, parsing rules are essential for accurately interpreting and processing languages, whether they are programming languages or natural languages. They provide the framework for understanding the structure and meaning of the input.
 
-## Abstract Syntax Tree (intermediate representation)
+## Abstract Syntax Tree (Intermediate Representation)
 An abstract syntax tree (AST), is a hierarchical tree structure that represents the syntactic structure of a string according to a formal grammar. It represents how the input is broken down into its elementary parts based on the parsing rules.
 
 Key Components of an AST:
