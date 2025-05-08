@@ -121,20 +121,20 @@
 % The begining of the contents
 % \chapterimage{kep/header.png}
 
-\chpt{Feladatkiírás}
-A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével.
+% \chpt{Feladatkiírás}
+% A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével.
 
-% \chapterimage{kep/header2.png}
-\chpt{Opis práce}
-Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorovými programami. Autor vyvinie vlastný programovací jazyk (Benex). Pre tento programovací jazyk autor vyvíja kompilátor, ktorý obsahuje frontend (parser) a backend (kompilátor). Kompilátor vytvára spustiteľné súbory. Autor demonštruje kompilátor na niekoľkých príkladoch programov.
+% % \chapterimage{kep/header2.png}
+% \chpt{Opis práce}
+% Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorovými programami. Autor vyvinie vlastný programovací jazyk (Benex). Pre tento programovací jazyk autor vyvíja kompilátor, ktorý obsahuje frontend (parser) a backend (kompilátor). Kompilátor vytvára spustiteľné súbory. Autor demonštruje kompilátor na niekoľkých príkladoch programov.
 
-\pagebreak
+% \pagebreak
 
 % \chapterimage{kep/header3.png}
 \chpt{Abstrakt}\label{sec:abstrakt}
 Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorovými programami. Autor vyvinie vlastný programovací jazyk (Benex). Pre tento programovací jazyk autor vyvíja kompilátor, ktorý obsahuje frontend (parser) a backend (kompilátor). Kompilátor vytvára spustiteľné súbory. Autor demonštruje kompilátor na niekoľkých príkladoch programov.
 
-\textbf{Kľúčové slová: klúč1, klúč2, klúč3}
+\textbf{Kľúčové slová: Kompilátor, Jazyk, x86, Assembly}
 
 \pagebreak
 
@@ -142,31 +142,102 @@ Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorový
 \chpt{Absztrakt}\label{sec:absztrakt}
 A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével.
 
-\textbf{Kulcsszavak: kulcs1, kulcs2, kulcs3}
+\textbf{Kulcsszavak: Compiler, nyelv, x86, Assembly}
 
 \pagebreak
 
 % \chapterimage{kep/header.png}
-\chpt{Abstract}
+\chpt{Abstract}\label{sec:abstract}
 The aim of this thesis is to create a programming language with compiler and sample programs. The author develops an own programming language (Benex). For this programming language, the author develops a compiler, which includes a frontend (parser) and a backend (compiler). The compiler produces executable files. The author demonstrates the compiler with some example programs.
 
-\textbf{Keywords: key1, key2, key3}
+\textbf{Keywords: Compiler, Language, x86, Assembly}
 
 % TODO: intro here
 \chapter*{Instroduction}
 \addcontentsline{toc}{chapter}{Instroduction}
 \markboth{}{\sffamily\normalsize{Instroduction}}
-\begin{eBox}
-    This is a comment that i might want to add ?? i guess
-\end{eBox}
+% \begin{eBox}
+%     This is a comment that i might want to add ?? i guess
+% \end{eBox}
 This is the place where i write about the intro...
-
-% TODO: tables are automatically moved to the begining or end of the page, sometimes this makes no sense with how the text flows, insert manual tables
 
 % Begining of the main content
 \chapter{Language Theory}
 \markdownInput{notes.md}
-\markdownInput{x86.md}
+\markdownInput{x86-0.md}
+% The bytes of an instruction
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        Rex prefix & Opcode & ModR/M & SIB & Displacement & Immediate \\
+        1 byte & 1-3 bytes & 1 byte & 1 byte & 1-4 bytes & 1-8 bytes \\
+        optional &  & optional & optional & optional & optional
+    \end{tabular}
+\end{center}
+\markdownInput{x86-1.md}
+% Truth table of the AND, OR, XOR opeartions
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+        A & B & A \& B & A $|$ B & A \^ B \\
+        0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 1 & 1 \\
+        1 & 0 & 0 & 1 & 1 \\
+        1 & 1 & 1 & 1 & 0
+    \end{tabular}
+\end{center}
+\markdownInput{x86-2.md}
+% EFLAGS register flags
+\begin{center}
+    \begin{tabular}{|l|l|l|}
+        Shorthand Name & Flag name & Flag description \\
+        OF & Overflow Flag & Set if operation overflowed \\
+        CF & Carry Flag & Set if operation has the carry bit set \\
+        ZF & Zero Flag & Set if operation result was zero \\
+        SF & Sign Flag & Set if operation has the negative sign set \\
+        PF & Parity Flag & Set if operation has an even number of 1 bits \\
+    \end{tabular}
+\end{center}
+\markdownInput{x86-3.md}
+% Conditional jump instructions
+\begin{center}
+    \begin{tabular}{|l|l|l|}
+        Mnemonic & Description & Condition \\
+        JA & jump if above & CF == 0 \&\& ZF == 0 \\
+        JNBE & jump if not below or equal & CF == 0 \&\& ZF == 0 \\
+        JAE & jump if above or equal & CF == 0 \\
+        JNB & jump if not below & CF == 0 \\
+        JNC & jump if not carry & CF == 0 \\
+        JB & jump if below & CF == 1 \\
+        JC & jump if carry & CF == 1 \\
+        JNAE & jump if not above or equal & CF == 1 \\
+        JBE & jump if below or equal & CF == 1 \&\& ZF == 1 \\
+        JNA & jump if not above & CF == 1 \&\& ZF == 1 \\
+        JCXZ & jump if `cx` zero & CX == 0 \\
+        JECXZ & jump if `ecx` zero & ECX == 0 \\
+        JRCXZ & jump if `rcx` zero & RCX == 0 \\
+        JE & jump if equal & ZF == 1 \\
+        JZ &  jump if zero & ZF == 1 \\
+        JG & jump if greater & ZF == 0 \&\& SF == OF \\
+        JNLE & jump if not less or equal & ZF == 0 \&\& SF == OF \\
+        JGE & jump if greater or equal & SF == OF \\
+        JNL & jump if not less & SF == OF \\
+        JL & jump if less & SF != OF \\
+        JNGE & jump if not greater of equal & SF != OF \\
+        JLE & jump if less or equal & ZF == 1 \&\& SF != OF \\
+        JNG & jump if not greater & ZF == 1 \&\& SF != OF \\
+        JNE & jump if not equal & ZF == 0 \\
+        JNZ & jump if not zero & ZF == 0 \\
+        JNO & jump if not overflow & OF == 0 \\
+        JNP & jump if no parity & PF == 0 \\
+        JPO & jump if parity odd & PF == 0 \\
+        JNS & jump if no sign & SF == 0 \\
+        JO & jump if overflow & OF == 1 \\
+        JP & jump if parity & PF == 1 \\
+        JPE & jump if parity even & PF == 1 \\
+        JS & jump if sign & SF == 1 \\
+    \end{tabular}
+\end{center}
+\markdownInput{x86-4.md}
+
 
 % \chapterimage{kep/header2.png}
 \chapter{The Compiler}
@@ -184,10 +255,10 @@ The goal of our work was to explore the architecture of a compiler and implement
 \pagebreak
 
 % \chapterimage{kep/header3.png}
-\chapter*{Resumé}
-\addcontentsline{toc}{chapter}{Resumé}
-\markboth{}{\sffamily\normalsize{Resumé}}
-Some final resume of the work.
+% \chapter*{Resumé}
+% \addcontentsline{toc}{chapter}{Resumé}
+% \markboth{}{\sffamily\normalsize{Resumé}}
+% Some final resume of the work.
 
 % TODO: add this once there is something in the bibliography
 % \printbibliography[title=References]
