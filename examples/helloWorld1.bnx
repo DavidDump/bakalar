@@ -1,0 +1,11 @@
+STD_HANDLE_STDOUT :: -12;
+
+#library "kernel32.dll";
+WriteFile    :: #extern (handle: s64, data: string, dataLen: u64, bytesRead: u64*, overlapped: s64);
+GetStdHandle :: #extern (handle: s64) -> s64;
+
+main :: () -> u8 {
+    stdout := GetStdHandle(STD_HANDLE_STDOUT);
+    WriteFile(stdout, "Hello world", 11, 0, 0);
+    return 0;
+}
