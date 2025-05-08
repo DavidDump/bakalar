@@ -1,5 +1,5 @@
-## List of all the functions in the codebase
-This is a list of all the functions that are present in the benex compiler codebase, aswell as a short description of what each function does.
+# List Of All The Functions
+This is a list of all the functions that are present in the Benex compiler codebase, aswell as a short description of what each function does.
 
 ### Lexer
 ```c
@@ -53,7 +53,8 @@ void parseScopeStoreConst(Scope scope, String id, Expression* expr);
 // @id - the name of the symbol that was declared
 // @statement - the type or the expression
 //              used to infer the type of the symbol
-void parseScopeStoreVar(Scope* scope, String id, Statement* statement);
+void parseScopeStoreVar(Scope* scope, String id,
+                        Statement* statement);
 // Creates a binary expression
 Expression* makeBinary(Arena* mem, Expression* left,
                        Token op, Expression* right);
@@ -64,7 +65,8 @@ Expression* makeNumber(ParseContext* ctx, Arena* mem, Token tok);
 // Creates a symbol expression
 Expression* makeSymbol(Arena* mem, Token identifier);
 // Creates a function call expression
-Expression* makeFunctionCall(ParseContext* ctx, Arena* mem, Token next);
+Expression* makeFunctionCall(ParseContext* ctx,
+                             Arena* mem, Token next);
 // Creates a string expression
 Expression* makeString(Arena* mem, Token value);
 // Creates a bool expression
@@ -148,7 +150,8 @@ s64 getPresedence(Token token);
 // @mem - arena allocator that will be used
 //        for memory allocation during the function
 // @left - the left subexpression of the resulting expression
-// @minPrec - the minimum presedence of the operators encountered so far
+// @minPrec - the minimum presedence
+//            of the operators encountered so far
 // @return the parsed subexpression
 Expression* parseIncreasingPresedence(ParseContext* ctx, Arena* mem,
                                       Expression* left, s64 minPrec);
@@ -157,7 +160,8 @@ Expression* parseIncreasingPresedence(ParseContext* ctx, Arena* mem,
 // @ctx - the context of the parser
 // @mem - arena allocator that will be used
 //        for memory allocation during the function
-// @minPrec - the minimum presedence of the operators encountered so far
+// @minPrec - the minimum presedence
+//            of the operators encountered so far
 // @return the parsed subexpression
 Expression* parseDecreasingPresedence(ParseContext* ctx,
                                       Arena* mem, s64 minPrec);
@@ -177,8 +181,8 @@ Statement* parseStatement(ParseContext* ctx,
 // if successful the target doesnt need to be returned
 // as its passed in as a pointer,
 // if not prints error to user and exits
-GlobalScope* parseGlobalScopeInto(ParseContext* ctx,
-                                  Arena* mem, GlobalScope* globalScope);
+GlobalScope* parseGlobalScopeInto(ParseContext* ctx, Arena* mem,
+                                  GlobalScope* globalScope);
 // Attempt to parse a global scope,
 // if successful returns a global scope,
 // if not prints error to user and exits
@@ -210,7 +214,8 @@ ConstValue evaluateUnaryExpression(Token operator, ConstValue value);
 // @id - the name of the sybol
 // @return true if defined, false if not
 bool isSymbolDefined(TypecheckedScope* containing,
-                     Hashmap(String, ConstValue)* constants, String id);
+                     Hashmap(String, ConstValue)* constants,
+                     String id);
 // Declare a variable in a scope, check for redefinitions
 // @scope - the scope that the variable is declared in
 // @constants - all the constant and their values
@@ -260,10 +265,12 @@ void saveStruct(TypecheckedScope* scope,
 // @mem - arena allocator that will be used
 //        for memory allocation during the function
 // @parent - the parent of this scope
-TypecheckedScope* TypecheckedScopeInit(Arena* mem, TypecheckedScope* parent);
+TypecheckedScope* TypecheckedScopeInit(Arena* mem,
+                                       TypecheckedScope* parent);
 // Evaluates a single constant expression
-EvaluateConstantResult evaluateConstant(Expression* expr, Arena* mem,
-                                        Hashmap(String, ConstValue)* evaluatedConstatants);
+EvaluateConstantResult
+evaluateConstant(Expression* expr, Arena* mem,
+                 Hashmap(String, ConstValue)* evaluatedConstatants);
 // Converts a constant value to an expression
 Expression ConstValueToExpression(Arena* mem, ConstValue value);
 // Finds the value bound to a constant symbol
@@ -290,18 +297,23 @@ TypeResult findVariableType(TypecheckedScope* scope, String id);
 // Attemts to typecheck a single expression,
 // if successful returns the typechecked expression,
 // if not prints error to user and exits
-TypecheckedExpression* typecheckExpression(Arena* mem, Expression* expr,
-                                           TypecheckedScope* scope,
-                                           Hashmap(String, ConstValue)* constants,
-                                           TypeInfo* expected);
+TypecheckedExpression*
+typecheckExpression(Arena* mem, Expression* expr,
+                    TypecheckedScope* scope,
+                    Hashmap(String, ConstValue)* constants,
+                    TypeInfo* expected);
 // Finds all the function and structure declarations in a scope
-FunctionsInScope typecheckProcessConsts(Arena* mem, Scope scope,
-                                        Hashmap(String, ConstValue)* target);
+FunctionsInScope
+typecheckProcessConsts(Arena* mem, Scope scope,
+                       Hashmap(String, ConstValue)* target);
 // Attemts to typecheck all the functions in a scope,
 // if not successful prints error to user and exits
-void typecheckFunctions(Arena* mem, Hashmap(String, ConstValue)* constants,
-                        TypecheckedScope* parent, FunctionsInScope functions);
-// Attemts to typecheck a scope, rather that returning the typechecked scope,
+void typecheckFunctions(Arena* mem,
+                        Hashmap(String, ConstValue)* constants,
+                        TypecheckedScope* parent,
+                        FunctionsInScope functions);
+// Attemts to typecheck a scope,
+// rather that returning the typechecked scope,
 // the result parameter is used to return the result,
 // if not successful prints error to user and exits
 void typecheckScopeInto(Arena* mem, GenericScope* scope,
@@ -311,15 +323,17 @@ void typecheckScopeInto(Arena* mem, GenericScope* scope,
 // Attemts to typecheck a scope,
 // if successful returns a typechecked scope,
 // if not prints error to user and exits
-TypecheckedScope* typecheckScope(Arena* mem, GenericScope* scope,
-                                 TypecheckedScope* parent,
-                                 Hashmap(String, ConstValue)* constants,
-                                 TypeInfo* expectedReturnType);
+TypecheckedScope*
+typecheckScope(Arena* mem, GenericScope* scope,
+               TypecheckedScope* parent,
+               Hashmap(String, ConstValue)* constants,
+               TypeInfo* expectedReturnType);
 // Attemts to typecheck the global scope,
 // if successful returns a typechecked scope,
 // if not prints error to user and exits
-TypecheckedScope* typecheckGlobalScope(Arena* mem, GlobalScope* scope,
-                                       Hashmap(String, ConstValue)* constants);
+TypecheckedScope*
+typecheckGlobalScope(Arena* mem, GlobalScope* scope,
+                     Hashmap(String, ConstValue)* constants);
 ```
 
 ### Codegen / Assembler
@@ -412,7 +426,8 @@ TypeInfo* findFunctionType(GenScope* localScope, String id);
 // to the type of the right hand side expression,
 // into the code buffer of the context
 void gen_x86_64_cast(GenContext* ctx, TypecheckedExpression* lhs,
-                     TypecheckedExpression* rhs, GenScope* localScope);
+                     TypecheckedExpression* rhs,
+                     GenScope* localScope);
 // Find the offset of a field in a struct by name,
 // returns result or an error
 StructFieldResult findStructFieldOffsetByName(TypeInfo* structType,
@@ -423,9 +438,11 @@ StructFieldResult findStructFieldOffsetByIndex(TypeInfo* structType,
                                                u64 index);
 // Find the type of a variable, returns result or an error
 VariableTypeResult findVariableType(GenScope* scope, String id);
-// Emit the bytecode of an expression to the code buffer of the context,
-// the result of the expression will end up in the rax register
-void gen_x86_64_expression(GenContext* ctx, TypecheckedExpression* expr,
+// Emit the bytecode of an expression to the code buffer
+// of the context, the result of the expression will end up in the
+// rax register
+void gen_x86_64_expression(GenContext* ctx,
+                           TypecheckedExpression* expr,
                            GenScope* localScope);
 // Emit the bytecode of a condition to the code buffer of the context,
 // returns the offset that should get patched,
@@ -446,7 +463,8 @@ void genGenericScope(GenContext* ctx, Arena* mem,
 // into the code buffer of the context
 void genStatement(GenContext* ctx, Arena* mem,
                   TypecheckedStatement statement, GenScope* genScope);
-// Calculate and reserve stackspace at the begining of a function scope,
+// Calculate and reserve stackspace
+// at the begining of a function scope,
 // for each variable used in the function scope
 void calculateSpaceForVariables(GenScope* genScope,
                                 TypecheckedScope* scope);
@@ -480,9 +498,10 @@ u32 findFunctionRVA(Hashmap(String, LibName)* libs, String name);
 u32 findDataRVA(Hashmap(String, UserDataEntry)* userData,
                 String name);
 // Create the data section from the hashmap of data entries
-ParsedDataSection parseDataSection(Hashmap(String, LibName)* libs,
-                                   Hashmap(String, UserDataEntry)* userData,
-                                   IMAGE_SECTION_HEADER *header);
+ParsedDataSection
+parseDataSection(Hashmap(String, LibName)* libs,
+                 Hashmap(String, UserDataEntry)* userData,
+                 IMAGE_SECTION_HEADER *header);
 ```
 
 ### Miscellaneous functions
@@ -529,7 +548,8 @@ u64 StringHash(String str);
 Region *new_region(size_t capacity);
 void free_region(Region *r);
 void *arena_alloc(Arena *a, size_t size_bytes);
-void *arena_realloc(Arena *a, void *oldptr, size_t oldsz, size_t newsz);
+void *arena_realloc(Arena *a, void *oldptr,
+                    size_t oldsz, size_t newsz);
 void arena_reset(Arena *a);
 void arena_free(Arena *a);
 ```
