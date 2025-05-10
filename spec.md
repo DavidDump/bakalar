@@ -80,10 +80,10 @@ maybes:
     - `\"` inserts a double quote character
     - `\\` inserts a backslash
   - if a string literal spans two or more lines the newline at the end line will also be added to the string literals as if `\n` was used, the same is true for tabs
-- function literals consist of an **argument list**, a **return type list**, and a **function body**
+- function literals consist of an **argument list**, a **return type tuple**, and a **function body**
   - the argument list is enclosed in parentheses (`( ... )`) and contains zero or more arguments, an argument in a name followed by a colon (`:`) and a type, multiple arguments are comma (`,`) separated, ex.: `(number1: u64, number2: u64)`
   - the return type list is a comma (`,`) separated list of types, the list can be omitted if the function does not return anything, ex.: `u64, bool`
-  - the argument list and the return type list are delimited by the arrow symbol (`->`), if the return type list is omitted this symbol can also be omitted
+  - the argument list and the return type tuple are delimited by the arrow symbol (`->`), if the return type tuple is omitted this symbol can also be omitted
   - the function body is a list of statements enclosed in curly braces (`{ ... }`)
   example of a function literal: `(number1: u64, number2: u64) -> u64, bool { ... }`
 - struct literals start with the name of the struct followed by a comma (`,`) separated initializer list enclosed in curly braces (`{ ... }`)
@@ -127,7 +127,7 @@ ONE := 1;
 TWO := 2;
 result := ONE + TWO;
 ```
-If we use variables instead in the second example, the expressions of `ONE` and `TWO` are first stored in memory, then read from memory again when the operation is performed. NOTE: this is a simple example end using SSE both cases would generate the same byte code.
+If we use variables instead in the second example, the expressions of `ONE` and `TWO` are first stored in memory, then read from memory again when the operation is performed. NOTE: this is a simple example end using SSA both cases would generate the same byte code.
 
 All symbols have a type. The type of symbol is either explicitly specified by the programmer or inferred by the compiler. If the programmer wishes to specify a type they can do so after the first colon (`:`) of the declaration operators (`:=` or `::`). Example:
 ```
@@ -185,7 +185,7 @@ Usually languages use two keywords for iteration: `for` and `while`. Other that 
   - `loop foo < 5 { ... }` - foo is assumed to be an integer, this will iterate while foo is less than 5, the condition is checked on each iteration of the loop
 - Loops can also iterate over arrays, in this case instead of an expression, the `loop` keyword is followed by a name, that the Nth element will be bound to every iteration, the `in` keyword, and lastly the array to iterate over, ex.:
   - `loop number in numbers { ... }` - numbers is assumed to be and array, number will be bound to the value of the Nth element of the array
-  - `loop number* in numbers { ... }` - numbers is assumed to be and array, number will be bound to the reference of the Nth element of the array
+  - `loop number* in numbers { ... }` - numbers is assumed to be and array, number will be bound to a pointer to the Nth element of the array
 <!-- NOTE: maybe clearer names in the last two examples -->
 
 Similarly to the `if` statement, the `loop` body can also have its curly braces (`{ ... }`) omitted if the body only contains one statement. Another similarity with the `if` keyword is that the expression following the `loop` keyword does not need to be enclosed in parentheses (`( ... )`). If parenthesis are provided they are not part of the `loop` statement, instead are part of the expression.
