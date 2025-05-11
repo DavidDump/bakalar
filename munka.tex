@@ -9,7 +9,6 @@
 \usepackage{svg}
 \usepackage{ragged2e}
 \usepackage{markdown}
-\usepackage[SC5b,ISBN=000-00-000-0000-0]{ean13isbn}
 \usepackage[toc]{appendix}
 
 \markdownSetup{pipeTables,tableCaptions}
@@ -43,9 +42,6 @@
 
 \urlstyle{same}
 
-\ExecuteBibliographyOptions{sorting=none}
-\addbibresource{manuscript.bib}
-
 \begin{document}
 
 % Title page
@@ -66,7 +62,6 @@
         {\Huge Creation of the Benex Programming Language} \\
         Szakdolgozat \\
         Benes Dávid \\
-        \ISBN \\
         \hfill\the\year{}, Komárom\hfill
     }
 \end{minipage}
@@ -98,9 +93,8 @@
             Tanszék megnevezése: & Informatikai Tanszék \\
         \end{tabular}
         \vfill
-        Označenie typu práce - Szakdolgozat \\
+        Szakdolgozat \\
         Benes Dávid \\
-        \ISBN \\
         \hfill\the\year{}, Komárno\hfill
 	}
 \end{minipage}
@@ -113,23 +107,7 @@
 
 \tableofcontents
 \pagebreak
-\listoffigures
-\addcontentsline{toc}{section}{Ábrák jegyzéke}
-\pagebreak
 
-% The begining of the contents
-% \chapterimage{kep/header.png}
-
-% \chpt{Feladatkiírás}
-% A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével.
-
-% % \chapterimage{kep/header2.png}
-% \chpt{Opis práce}
-% Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorovými programami. Autor vyvinie vlastný programovací jazyk (Benex). Pre tento programovací jazyk autor vyvíja kompilátor, ktorý obsahuje frontend (parser) a backend (kompilátor). Kompilátor vytvára spustiteľné súbory. Autor demonštruje kompilátor na niekoľkých príkladoch programov.
-
-% \pagebreak
-
-% \chapterimage{kep/header3.png}
 \chpt{Abstrakt}\label{sec:abstrakt}
 Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorovými programami. Autor vyvinie vlastný programovací jazyk (Benex). Pre tento programovací jazyk autor vyvíja kompilátor, ktorý obsahuje frontend (parser) a backend (kompilátor). Kompilátor vytvára spustiteľné súbory. Autor demonštruje kompilátor na niekoľkých príkladoch programov.
 
@@ -137,7 +115,6 @@ Cieľom tejto práce je vytvoriť programovací jazyk s kompilátorom a vzorový
 
 \pagebreak
 
-% \chapterimage{kep/header4.png}
 \chpt{Absztrakt}\label{sec:absztrakt}
 A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordítóprogrammal és mintaprogramokkal. A szerző egy saját programnyelvet tervez (Benex). Ehhez a programnyelvhez készít egy fordító programot, mely tartalmaz egy frontendet (parser) és egy backendet is (compiler). A compiler futtatható fájlokat hoz létre. A szerző demonstrálja az elkészített compilert néhány példaprogram segítségével.
 
@@ -145,7 +122,6 @@ A dolgozat célja egy saját programnyelv készítése a hozzá tartozó fordít
 
 \pagebreak
 
-% \chapterimage{kep/header.png}
 \chpt{Abstract}\label{sec:abstract}
 The aim of this thesis is to create a programming language with compiler and sample programs. The author develops an own programming language (Benex). For this programming language, the author develops a compiler, which includes a frontend (parser) and a backend (compiler). The compiler produces executable files. The author demonstrates the compiler with some example programs.
 
@@ -233,31 +209,25 @@ The aim of this thesis is to create a programming language with compiler and sam
 \end{center}
 \markdownInput{x86-4.md}
 
-
-% \chapterimage{kep/header2.png}
 \chapter{The Compiler}
 \markdownInput{structure.md}
 \markdownInput{spec.md}
 
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
-Some conclusion of the work.
-The goal of our work was to explore the architecture of a compiler and implement a basic example of all the steps required to generate an executable for windows. This basic skeleton can be used to keep building out features for the compiler, and implement any arbitrary feature.
+\markdownInput{conclusion.md}
 
 \pagebreak
 
 \chapter*{Resumé}
 \addcontentsline{toc}{chapter}{Resumé}
 \markboth{}{\sffamily\normalsize{Resumé}}
-Some final resume of the work.
-
-% TODO: add this once there is something in the bibliography
-% \printbibliography[title=References]
-% \addcontentsline{toc}{chapter}{References}
+\markdownInput{resume.md}
 
 \begin{appendices}
     \markdownInput{functions.md}
+    \markdownInput{examples.md}
+    \markdownInput{commits.md}
 \end{appendices}
-
 
 \end{document}
