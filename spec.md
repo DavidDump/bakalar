@@ -328,7 +328,7 @@ arr.data[0] = 1;
 ```
 
 ### Operators
-<!-- TODO: all the operators, mention that there is no impicit casting -->
+<!-- TODO: all the operators, mention that there is no implicit casting -->
 #### Binary Infix Operators
 Arithmetic operators are:
 - plus (`+`)

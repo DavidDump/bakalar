@@ -1,5 +1,5 @@
 <!-- ## Motivation and Influences -->
-The development of Benex has been motivated by both personal programming experiences and the study of existing languages. At its core, the language is designed to be paradigm agnostic, allowing programmers to work in a manner that suits their needs, without being constrained by rigid paradigms. It is a strongly and statically typed system that translates directly into native x86 machine code. 
+The development of Benex has been motivated by both personal programming experiences and the study of existing languages. At its core, the language is designed to be paradigm agnostic, allowing programmers to work in a manner that suits their needs, without being constrained by rigid paradigms. It is a strongly and statically typed system that translates directly into native x86 machine code.
 
 While Benex does not claim to introduce groundbreaking paradigms in programming language design, it seeks to refine and consolidate existing ideas. The central aim is to simplify the process of expressing intent in code, thereby reducing the syntactic overhead and cognitive load typically associated with more verbose languages such as C or Java. In comparison to systems-level languages like Rust or C++, Benex minimizes bureaucratic constraints, allowing for a more fluid and rapid iteration process while maintaining semantic correctness.
 
