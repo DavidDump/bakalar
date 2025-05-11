@@ -507,64 +507,109 @@ parseDataSection(Hashmap(String, LibName)* libs,
 ## Miscellaneous functions
 ### Types
 ```c
-TypeInfo* TypeExpressionToType(Expression* expr);
+// Returns the string representation of a type
 String TypeToString(Arena* mem, TypeInfo* typeInfo);
+// Initializer a simple typeInfo struct of type t
 TypeInfo* TypeInitSimple(Arena* mem, Type t);
+// Returns the size of a type in bytes
 u64 TypeToByteSize(TypeInfo* type);
+// Returns true if type is signed
 bool TypeIsSigned(TypeInfo* type);
+// Returns true if type is unsigned
 bool TypeIsUnsigned(TypeInfo* type);
+// Returns true if type is a float
 bool TypeIsFloat(TypeInfo* type);
+// Returns true if type is a integer
 bool TypeIsInt(TypeInfo* type);
+// Returns true if type is a number (integer or float)
 bool TypeIsNumber(TypeInfo* type);
+// Returns true if type is a boolean
 bool TypeIsBool(TypeInfo* type);
+// Returns true if type is a type
 bool TypeIsType(TypeInfo* type);
+// Returns true if type is a struct
 bool TypeIsStructDef(TypeInfo* type);
+// Returns true if two types match
 bool TypeMatch(TypeInfo* type1, TypeInfo* type2);
+// Returns the default type for an integer
 Type TypeDefaultInt();
+// Returns the default type for a float
 Type TypeDefaultFloat();
 ```
 
 ### Strings
 ```c
-String StringFromCstr(Arena* mem, char* cstr);
+// Creates a string from a c-string
 String StringFromCstrLit(char* cstr);
-String StringFromArray(Arena* mem, char* arr, int size);
+// Creates a string from a c-string,
+// copies it into the memory allocated by the arena
+String StringFromCstr(Arena* mem, char* cstr);
+// Returns true if two string are equal
 bool StringEquals(String str1, String str2);
+// Returns true if a string and a c-string are equal
 bool StringEqualsCstr(String str1, char* cstr);
+// Returns true if a string contains a substring
 bool StringContains(String str1, char* cstr);
+// Converts a string value to a u64
 u64 StringToU64(String value);
+// Converts a u64 value to a string
 String StringFromU64(Arena* mem, u64 value);
+// Converts a string value to a u32
 u32 StringToU32(String value);
+// Converts a string value to a s64
 s64 StringToS64(String value);
+// Converts a s64 value to a string
 String StringFromS64(Arena* mem, s64 value);
+// Converts a f64 value to a string
 String StringFromF64(Arena* mem, f64 value);
+// Returns true if a string ends with a substring
 bool StringEndsWith(String str, String end);
+// Returns the index of the last occurrence of a character,
+// if the character is not present in the string returns -1
 s64 StringLastIndexOf(String str, u8 c);
+// Calculate the djb2 hash of a string
 u64 StringHash(String str);
 ```
 
 ### Memory Arenas
 ```c
+// Creates a new memory region
 Region *new_region(size_t capacity);
+// Frees an existing memory region
 void free_region(Region *r);
+// Allocates the requested amount of bytes in an arena
 void *arena_alloc(Arena *a, size_t size_bytes);
+// Resizes a region of memory in an arena
 void *arena_realloc(Arena *a, void *oldptr,
                     size_t oldsz, size_t newsz);
+// Reset an arena to its initial state for future reuse
 void arena_reset(Arena *a);
+// Frees all the memory allocated in an arena
 void arena_free(Arena *a);
 ```
 
 ### Operator Functions
 ```c
+// Evaluate the result of a constant addition operation
 ConstValue _add(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant subtraction operation
 ConstValue _sub(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant multiplication operation
 ConstValue _mul(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant division operation
 ConstValue _div(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant boolean less than operation
 ConstValue _less(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant boolean greater than operation
 ConstValue _greater(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant boolean less than or equals operation
 ConstValue _less_eq(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant boolean greater than or equals operation
 ConstValue _greater_eq(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant boolean equals operation
 ConstValue _equals(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant boolean not equals operation
 ConstValue _not_equals(ConstValue lhs, ConstValue rhs);
+// Evaluate the result of a constant cast operation
 ConstValue _as(ConstValue lhs, ConstValue rhs);
 ```
