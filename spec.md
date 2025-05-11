@@ -184,8 +184,8 @@ Usually languages use two keywords for iteration: `for` and `while`. Other that 
 - Loop with an expression that evaluates to a boolean, this case will iterate while the expression evaluates to `true`, this means the expression will be evaluated and checked every iteration of the loop, ex.:
   - `loop foo < 5 { ... }` - foo is assumed to be an integer, this will iterate while foo is less than 5, the condition is checked on each iteration of the loop
 - Loops can also iterate over arrays, in this case instead of an expression, the `loop` keyword is followed by a name, that the Nth element will be bound to every iteration, the `in` keyword, and lastly the array to iterate over, ex.:
-  - `loop number in numbers { ... }` - numbers is assumed to be and array, number will be bound to the value of the Nth element of the array
-  - `loop number* in numbers { ... }` - numbers is assumed to be and array, number will be bound to a pointer to the Nth element of the array
+  - `loop number in numbers { ... }` - numbers is assumed to be an array, number will be bound to the value of the Nth element of the array
+  - `loop number* in numbers { ... }` - numbers is assumed to be an array, number will be bound to a pointer to the Nth element of the array
 <!-- NOTE: maybe clearer names in the last two examples -->
 
 Similarly to the `if` statement, the `loop` body can also have its curly braces (`{ ... }`) omitted if the body only contains one statement. Another similarity with the `if` keyword is that the expression following the `loop` keyword does not need to be enclosed in parentheses (`( ... )`). If parenthesis are provided they are not part of the `loop` statement, instead are part of the expression.
@@ -294,7 +294,7 @@ map: hashmap(string, u8);
 String and dynamic arrays are implemented partially in user space using structs. When declaring a string or a dynamic array the compiler will rewrite the code to the corresponding structure declaration before parsing.
 String syntax sugar:
 ```
-// String use the following struct
+// Strings are defined by the following struct
 String :: struct {
     length: u64;
     data: u8*;
