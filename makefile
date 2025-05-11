@@ -1,8 +1,8 @@
 munka.pdf:
-	pdflatex -shell-escape -silent munka.tex
+	pdflatex -shell-escape -silent -interaction=nonstopmode munka.tex
 
 .PHONY: clean
 clean:
-	del /Q *.aux *.log *.lua *.bcf *.idx *.lof *.xml *.toc *.pdf *.bbl *.blg
-	rmdir /Q /S _markdown_munka
-	rmdir /Q /S _minted
+	-rm *.aux *.log *.lua *.bcf *.idx *.lof *.xml *.toc *.pdf *.bbl *.blg
+	-rm -rf _markdown_munka
+	-rm -rf _minted

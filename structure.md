@@ -16,10 +16,7 @@ Our lexer iterates each source file, character by character. Then it categorizes
 The only special case that ignores these rules are comments. As comments store no information relevant to the compiler, it is adventitious to skip it as early in the compilation process as possible. Because of this, if the lexer finds two slash (`/`) characters following each other it will simply ignore all remaining character until it encounters a newline.
 The lexer also keeps track of the filename and the location in the file where each token is located. This is useful to record, as it can be used later for error messages.
 
-<!-- TODO: add some examples, how does a simple program lex, what tokens are created, something short, like the debug print in the compiler -->
 The hello world example would tokenize to the following tokens:
-<!-- maybe image maybe text -->
-<!-- ![bottom text](img/helloWorldTokens.png "title") -->
 ```
 examples\helloWorld.bnx:1:1  {  IDENTIFIER  main              }
 examples\helloWorld.bnx:1:6  {  DOUBLECOLON ::                }
@@ -61,10 +58,7 @@ The compiler uses a handwritten recursive descent parser. A recursive descent pa
 
 The parser takes tokens as an input, and outputs an abstract syntax tree (AST). This AST stores the lexical components of each statement, so that it is easier to access later in the compilation process, an example would be the name of the function in a function declaration statement.
 
-<!-- TODO: add some examples, for a small program, create a parse tree diagram, similar to the debug print that the compiler has -->
 After parsing the hello world example, the parser generates the following AST:
-<!-- maybe image maybe text -->
-<!-- ![bottom text ast](img/helloWorldAST2.png "title ast") -->
 ```
 VAR_CONST: {
     id: "main"
